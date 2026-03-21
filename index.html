@@ -77,6 +77,7 @@ const css = `
     padding:2px 7px;border-radius:10px;margin-left:8px;vertical-align:middle;letter-spacing:.05em}
   .tab-badge.crown{background:rgba(232,184,75,.15);color:${C.amber};border:1px solid rgba(232,184,75,.3)}
   .tab-badge.net{background:rgba(108,173,222,.12);color:${C.cuLight};border:1px solid rgba(108,173,222,.25)}
+  .tab-badge.tourney{background:rgba(91,186,133,.18);color:#5cba85;border:1px solid rgba(91,186,133,.3)}
 
   /* Loading skeleton */
   .skeleton{background:linear-gradient(90deg,${C.surface2} 25%,${C.surface3} 50%,${C.surface2} 75%);
@@ -541,7 +542,10 @@ function App() {
   }, []);
 
   const menNet    = data?.men?.net    || "—";
+  const menNet    = data?.men?.net     || "—";
   const womenNet  = data?.women?.net  || "—";
+  const menNcaa   = data?.men?.ncaaTourney   || "";
+  const womenNcaa = data?.women?.ncaaTourney || "";
   const updatedAt = data?.updated_utc ? fmtUpdated(data.updated_utc) : "Loading...";
 
   return (
@@ -566,10 +570,20 @@ function App() {
 
           <div className="tabs">
             <button className={`tab ${tab==="men"?"active":""}`} onClick={() => setTab("men")}>
-              Men's <span className="tab-badge crown">CBB Crown</span>
+              Men's{" "}
+              {menNcaa === "In"
+                ? <span className="tab-badge tourney">NCAA Tourney</span>
+                : menNcaa === "Out" && data?.men?.postseason_record !== undefined
+                  ? <span className="tab-badge crown">NET #{menNet}</span>
+                  : <span className="tab-badge net">NET #{menNet}</span>
+              }
             </button>
             <button className={`tab ${tab==="women"?"active":""}`} onClick={() => setTab("women")}>
-              Women's <span className="tab-badge net">NET #{womenNet}</span>
+              Women's{" "}
+              {womenNcaa === "In"
+                ? <span className="tab-badge tourney">NCAA Tourney</span>
+                : <span className="tab-badge net">NET #{womenNet}</span>
+              }
             </button>
           </div>
 
