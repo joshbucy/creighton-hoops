@@ -168,6 +168,26 @@ const css = `
     margin:6px 0 28px;font-style:italic;line-height:1.5}
 
   .links-section{margin-bottom:28px}
+
+  /* Program History */
+  .history-section{margin-bottom:28px}
+  .history-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.history-grid{grid-template-columns:1fr}}
+  .history-block{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;overflow:hidden}
+  .history-block-title{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.1em;
+    text-transform:uppercase;color:${C.cuLight};padding:10px 14px;border-bottom:1px solid ${C.surface3};
+    background:rgba(0,35,93,.4);font-weight:600}
+  .history-item{padding:8px 14px;border-bottom:1px solid rgba(3,43,102,.5);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.5}
+  .history-item:last-child{border-bottom:none}
+  .history-item .hi-label{color:${C.dim};font-size:12px;display:block;margin-bottom:2px}
+  .history-item .hi-val{color:${C.white};font-weight:600}
+  .history-item .hi-years{color:${C.cuLight};font-size:12px}
+  .history-highlight{background:rgba(0,92,169,.12)}
+  .wiki-link{font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.dim};
+    margin-top:8px;display:block;text-align:right}
+  .wiki-link a{color:${C.dim};text-decoration:none}
+  .wiki-link a:hover{color:${C.cuLight}}
   .links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
   .link-card{display:flex;align-items:center;gap:10px;padding:10px 14px;
     background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;
@@ -193,6 +213,49 @@ const css = `
 `;
 
 // ── Static link definitions (don't need to be in data.json) ──────────────────
+// ── Program history data (sourced from Wikipedia) ───────────────────────────
+const MEN_HISTORY = [
+  {
+    title: "NCAA Tournament",
+    highlight: true,
+    items: [
+      { label: "Appearances",  val: "27 total", years: "Most recent: 2025" },
+      { label: "Elite Eight",  val: "2 times",  years: "1941, 2023" },
+      { label: "Sweet Sixteen",val: "6 times",  years: "1962, 1964, 1974, 2021, 2023, 2024" },
+    ]
+  },
+  {
+    title: "Conference Titles",
+    items: [
+      { label: "Big East Regular Season", val: "1 title",   years: "2020" },
+      { label: "MVC Regular Season",      val: "15 titles", years: "1923–1943, 1978, 1989, 1991, 2001–2002, 2009, 2013" },
+      { label: "MVC Tournament",          val: "12 titles", years: "1978, 1981, 1989, 1991, 1999, 2000, 2002, 2003, 2005, 2007, 2012, 2013" },
+    ]
+  },
+];
+
+const WOMEN_HISTORY = [
+  {
+    title: "NCAA Tournament",
+    highlight: true,
+    items: [
+      { label: "Appearances",  val: "11 total", years: "Most recent: 2025" },
+      { label: "Elite Eight",  val: "1 time",   years: "2022" },
+      { label: "Sweet Sixteen",val: "1 time",   years: "2022" },
+    ]
+  },
+  {
+    title: "Conference & Postseason Titles",
+    items: [
+      { label: "Big East Regular Season", val: "1 title",  years: "2017" },
+      { label: "MVC Regular Season",      val: "2 titles", years: "2002, 2012" },
+      { label: "WAC Regular Season",      val: "2 titles", years: "1991, 1992" },
+      { label: "MVC Tournament",          val: "3 titles", years: "2002, 2003, 2013" },
+      { label: "WNIT Champion",           val: "1 title",  years: "2004" },
+    ]
+  },
+];
+
 const MEN_LINKS = [
   { icon:"🧮", name:"Warren Nolan MBB",  desc:"Team page, NET, quadrants",    url:"https://www.warrennolan.com/basketball/2026/schedule/Creighton" },
   { icon:"📋", name:"WN NET Team Sheet", desc:"Full NET team sheet",           url:"https://www.warrennolan.com/basketball/2026/team-net-sheet?team=Creighton" },
@@ -410,6 +473,31 @@ function Panel({ d, isWomen, loading }) {
         ))}
       </div>
       <div className="quad-note">Source: warrennolan.com NET quadrant splits</div>
+
+      {/* Program History */}
+      <div className="history-section">
+        <h2>Program History</h2>
+        <div className="history-grid">
+          {(isWomen ? WOMEN_HISTORY : MEN_HISTORY).map(({ title, items, highlight }) => (
+            <div className="history-block" key={title}>
+              <div className="history-block-title">{title}</div>
+              {items.map(({ label, val, years }) => (
+                <div className={`history-item${highlight ? " history-highlight" : ""}`} key={label}>
+                  <span className="hi-label">{label}</span>
+                  <span className="hi-val">{val}</span>
+                  {" "}<span className="hi-years">— {years}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <span className="wiki-link">
+          Source: <a href={isWomen
+            ? "https://en.wikipedia.org/wiki/Creighton_Bluejays_women%27s_basketball"
+            : "https://en.wikipedia.org/wiki/Creighton_Bluejays_men%27s_basketball"}
+            target="_blank" rel="noopener noreferrer">Wikipedia ↗</a>
+        </span>
+      </div>
 
       {/* Live Data Sources */}
       <div className="links-section">
