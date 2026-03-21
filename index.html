@@ -156,8 +156,9 @@ const css = `
   .quad-label{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.12em;
     text-transform:uppercase;color:${C.dim};margin-bottom:4px}
   .quad-rec{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1}
-  .quad-rec.q1{color:#5aabff} .quad-rec.q2{color:${C.green}}
-  .quad-rec.q3{color:${C.dim}} .quad-rec.q4{color:${C.cuGray}}
+  .quad-rec.win{color:#5cba85}
+  .quad-rec.loss{color:#e06060}
+  .quad-rec.even{color:#e8b84b}
   .quad-desc{font-family:'IBM Plex Mono',monospace;font-size:8px;color:${C.dim};margin-top:3px;line-height:1.4}
   .quad-note{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim};
     margin:6px 0 28px;font-style:italic;line-height:1.5}
@@ -271,11 +272,20 @@ function Panel({ d, isWomen, loading }) {
     { name:"Streak",           val:d?.streak || "N/A", cls: (d?.streak||"").startsWith("W") ? "good" : "bad" },
   ];
 
+  const recColor = (rec) => {
+    if (!rec || rec === "N/A") return "";
+    const parts = rec.replace("–", "-").split("-");
+    const w = parseInt(parts[0]) || 0;
+    const l = parseInt(parts[1]) || 0;
+    if (w > l) return "win";
+    if (l > w) return "loss";
+    return "even";
+  };
   const quads = [
-    { label:"Quad 1", rec:fmt(d?.q1_net), cls:"q1", desc:"Home 1–30\nNeutral 1–50\nAway 1–75" },
-    { label:"Quad 2", rec:fmt(d?.q2_net), cls:"q2", desc:"Home 31–75\nNeutral 51–100\nAway 76–135" },
-    { label:"Quad 3", rec:fmt(d?.q3_net), cls:"q3", desc:"Home 76–160\nNeutral 101–200\nAway 136–240" },
-    { label:"Quad 4", rec:fmt(d?.q4_net), cls:"q4", desc:"Home 161+\nNeutral 201+\nAway 241+" },
+    { label:"Quad 1", rec:fmt(d?.q1_net), desc:"Home 1–30\nNeutral 1–50\nAway 1–75" },
+    { label:"Quad 2", rec:fmt(d?.q2_net), desc:"Home 31–75\nNeutral 51–100\nAway 76–135" },
+    { label:"Quad 3", rec:fmt(d?.q3_net), desc:"Home 76–160\nNeutral 101–200\nAway 136–240" },
+    { label:"Quad 4", rec:fmt(d?.q4_net), desc:"Home 161+\nNeutral 201+\nAway 241+" },
   ];
 
   const recent = d?.recent_results || [];
@@ -381,10 +391,10 @@ function Panel({ d, isWomen, loading }) {
       {/* Quadrant Record */}
       <h2>Quadrant Record (NET)</h2>
       <div className="quad-grid">
-        {quads.map(({ label, rec, cls, desc }) => (
+        {quads.map(({ label, rec, desc }) => (
           <div className="quad-card" key={label}>
             <div className="quad-label">{label}</div>
-            <div className={`quad-rec ${cls}`}>{sk(rec)}</div>
+            <div className={`quad-rec ${recColor(rec)}`}>{sk(rec)}</div>
             <div className="quad-desc" style={{ whiteSpace:"pre-line" }}>{desc}</div>
           </div>
         ))}
