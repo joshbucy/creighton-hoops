@@ -159,7 +159,7 @@ const css = `
   .quad-rec.win{color:#5cba85}
   .quad-rec.loss{color:#e06060}
   .quad-rec.even{color:#e8b84b}
-  .quad-desc{font-family:'IBM Plex Mono',monospace;font-size:8px;color:${C.dim};margin-top:3px;line-height:1.4}
+  .quad-desc{font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.dim};margin-top:3px;line-height:1.4}
   .quad-note{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim};
     margin:6px 0 28px;font-style:italic;line-height:1.5}
 
@@ -245,7 +245,7 @@ function Panel({ d, isWomen, loading }) {
     { label:"Away",     val:fmt(d?.road),    sub:"Away record",          cls:"" },
     { label:"Neutral",  val:fmt(d?.neutral), sub:"Neutral sites",        cls:"" },
     { label:"Last 10",  val:fmt(d?.last10),  sub:"End of season",
-      cls: (() => { const w = parseInt((d?.last10 || "0").split("-")[0]); return (w >= 6 ? "good" : "bad") + " sm"; })() },
+      cls: (() => { const raw = (d?.last10 || "0-0"); const w = parseInt(raw.split(/[-–]/)[0]); return (w >= 6 ? "good" : "bad") + " sm"; })() },
   ];
 
   const sheetItems = [
@@ -274,7 +274,7 @@ function Panel({ d, isWomen, loading }) {
 
   const recColor = (rec) => {
     if (!rec || rec === "N/A") return "";
-    const parts = rec.replace("–", "-").split("-");
+    const parts = rec.split(/[-–]/);
     const w = parseInt(parts[0]) || 0;
     const l = parseInt(parts[1]) || 0;
     if (w > l) return "win";
