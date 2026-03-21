@@ -573,16 +573,14 @@ function App() {
               Men's{" "}
               {menNcaa === "In"
                 ? <span className="tab-badge tourney">NCAA Tourney</span>
-                : menNcaa === "Out" && data?.men?.postseason_record !== undefined
-                  ? <span className="tab-badge crown">NET #{menNet}</span>
-                  : <span className="tab-badge net">NET #{menNet}</span>
+                : <span className="tab-badge net">{"NET #" + menNet}</span>
               }
             </button>
             <button className={`tab ${tab==="women"?"active":""}`} onClick={() => setTab("women")}>
               Women's{" "}
               {womenNcaa === "In"
                 ? <span className="tab-badge tourney">NCAA Tourney</span>
-                : <span className="tab-badge net">NET #{womenNet}</span>
+                : <span className="tab-badge net">{"NET #" + womenNet}</span>
               }
             </button>
           </div>
