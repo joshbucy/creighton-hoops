@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creighton Bluejays Basketball Hub</title>
-  <meta name="description" content="Live stats, rankings, and AI summaries for the Creighton Bluejays men's and women's basketball teams." />
-  <meta property="og:title" content="Creighton Bluejays Basketball Hub" />
-  <meta property="og:description" content="Live NET rankings, quadrant records, recent results and AI summaries for both Creighton basketball teams." />
-  <!-- React + Babel from CDN — no build step needed -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <meta name="description" content="Live stats, rankings, and AI summaries for Creighton Bluejays men's and women's basketball." />
 </head>
 <body>
   <div id="root"></div>
-  <script type="text/babel">
+
+  <!-- React 18 -->
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <!-- Babel standalone for JSX transform (no build step needed) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+  <script type="text/babel" data-presets="react">
     const { useState, useEffect } = React;
 
 
@@ -410,7 +411,7 @@ function Panel({ d, isWomen, loading }) {
 }
 
 // ── App ───────────────────────────────────────────────────────────────────────
-export default function App() {
+function App() {
   const [tab,       setTab]       = useState("men");
   const [data,      setData]      = useState(null);
   const [loading,   setLoading]   = useState(true);
@@ -533,7 +534,9 @@ const FALLBACK_DATA = {
 };
 
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
+    // Mount
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
     root.render(<App />);
   </script>
 </body>
