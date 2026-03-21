@@ -48,7 +48,7 @@ const css = `
   .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 20px 80px}
 
   header{text-align:center;padding:40px 0 28px}
-  .kicker{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  .kicker{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;
     letter-spacing:.2em;text-transform:uppercase;color:${C.cuLight};
     background:rgba(108,173,222,.1);border:1px solid rgba(108,173,222,.3);
     padding:5px 16px;border-radius:2px;margin-bottom:16px;animation:pulse 3s ease-in-out infinite}
@@ -59,7 +59,7 @@ const css = `
     color:${C.white};text-shadow:0 0 50px rgba(0,92,169,.7)}
   h1 em{color:${C.cuLight};font-style:normal}
   .h1sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,3vw,24px);letter-spacing:.15em;color:${C.dim};margin-top:4px}
-  .updated{font-family:'IBM Plex Mono',monospace;font-size:10px;color:${C.dim};margin-top:10px;
+  .updated{font-family:'IBM Plex Mono',monospace;font-size:14px;color:${C.dim};margin-top:10px;
     display:flex;align-items:center;justify-content:center;gap:6px}
   .updated::before{content:'●';color:${C.green};font-size:8px}
 
@@ -73,7 +73,7 @@ const css = `
   .tab.active{background:linear-gradient(135deg,${C.cuNavy},${C.cuBlue});color:${C.white};
     text-shadow:0 0 20px rgba(108,173,222,.4)}
   .tab:hover:not(.active){background:${C.surface2};color:${C.cuLight}}
-  .tab-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;
+  .tab-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;
     padding:2px 7px;border-radius:10px;margin-left:8px;vertical-align:middle;letter-spacing:.05em}
   .tab-badge.crown{background:rgba(232,184,75,.15);color:${C.amber};border:1px solid rgba(232,184,75,.3)}
   .tab-badge.net{background:rgba(108,173,222,.12);color:${C.cuLight};border:1px solid rgba(108,173,222,.25)}
@@ -83,7 +83,7 @@ const css = `
     background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:3px;color:transparent!important}
   @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-  h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:${C.white};
+  h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.1em;color:${C.white};
     margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid ${C.surface3};
     display:flex;align-items:center;gap:8px}
   h2::before{content:'';width:4px;height:18px;border-radius:2px;flex-shrink:0;
@@ -94,56 +94,56 @@ const css = `
     background:linear-gradient(135deg,rgba(0,92,169,.22),rgba(0,35,93,.18));border:1px solid rgba(108,173,222,.4)}
   .summary-banner.ended{background:linear-gradient(135deg,rgba(40,40,80,.35),rgba(0,35,93,.2));border:1px solid rgba(130,130,160,.3)}
   .summary-banner::after{content:'🏀';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:30px;opacity:.15}
-  .summary-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  .summary-label{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
     color:${C.cuLight};margin-bottom:6px;display:flex;align-items:center;gap:6px}
   .summary-label.ended{color:${C.cuLightGray}}
   .ai-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:${C.cuLight};
     animation:pulse-dot 2s ease-in-out infinite}
   @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-  .summary-text{font-size:13px;line-height:1.6;color:${C.text}}
+  .summary-text{font-size:15px;line-height:1.6;color:${C.text}}
   .summary-text strong{color:${C.white}}
 
   .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:10px;margin-bottom:28px}
   .stat-card{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;
     padding:13px 10px;text-align:center;transition:border-color .2s}
   .stat-card:hover{border-color:${C.cuBlue}}
-  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.14em;
     text-transform:uppercase;color:${C.dim};margin-bottom:4px}
   .stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1;color:${C.white}}
   .stat-val.good{color:${C.cuLight}} .stat-val.bad{color:${C.red}} .stat-val.amber{color:${C.amber}}
-  .stat-val.sm{font-size:15px;padding-top:4px;line-height:1.3}
-  .stat-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};margin-top:2px}
+  .stat-val.sm{font-size:18px;padding-top:4px;line-height:1.3}
+  .stat-sub{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim};margin-top:2px}
 
   .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
   @media(max-width:520px){.metrics-grid{grid-template-columns:1fr}}
   .metric-block{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;overflow:hidden}
-  .metric-block-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;
+  .metric-block-title{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.14em;
     text-transform:uppercase;color:${C.dim};padding:8px 12px;border-bottom:1px solid ${C.surface3};
     background:rgba(0,35,93,.4)}
   .metric-row{display:flex;justify-content:space-between;align-items:center;
     padding:7px 12px;border-bottom:1px solid rgba(3,43,102,.6);transition:background .15s}
   .metric-row:last-child{border-bottom:none}
   .metric-row:hover{background:${C.surface2}}
-  .metric-name{font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.dim}}
-  .metric-val{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:${C.white};text-align:right}
+  .metric-name{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim}}
+  .metric-val{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:${C.white};text-align:right}
   .metric-val.good{color:${C.cuLight}} .metric-val.ok{color:${C.cuLightGray}}
   .metric-val.bad{color:${C.red}} .metric-val.amber{color:${C.amber}} .metric-val.dim{color:${C.dim};font-weight:400}
-  .metric-note{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};
+  .metric-note{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim};
     padding:6px 12px;border-top:1px solid rgba(3,43,102,.4);font-style:italic;line-height:1.5}
 
-  .results-table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:28px}
+  .results-table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:14px;margin-bottom:28px}
   .results-table thead tr{border-bottom:1px solid ${C.surface3}}
-  .results-table th{padding:7px 12px;text-align:left;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  .results-table th{padding:7px 12px;text-align:left;font-size:15px;letter-spacing:.12em;text-transform:uppercase;
     color:${C.dim};font-weight:600}
   .results-table th:last-child{text-align:right}
   .results-table td{padding:8px 12px;border-bottom:1px solid rgba(3,43,102,.5)}
   .results-table tr:last-child td{border-bottom:none}
   .results-table tr:hover td{background:${C.surface}}
-  .results-table td.date{color:${C.dim};font-size:10px;white-space:nowrap}
+  .results-table td.date{color:${C.dim};font-size:14px;white-space:nowrap}
   .results-table td.opp{color:${C.text};font-weight:600}
-  .results-table td.opp .ctx{font-weight:400;color:${C.dim};font-size:10px;margin-left:5px}
+  .results-table td.opp .ctx{font-weight:400;color:${C.dim};font-size:14px;margin-left:5px}
   .results-table td.score{text-align:right;white-space:nowrap}
-  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;
+  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;
     padding:2px 7px;border-radius:3px;margin-right:5px}
   .pill.w{background:rgba(91,186,133,.18);color:${C.green};border:1px solid rgba(91,186,133,.3)}
   .pill.l{background:rgba(224,96,96,.15);color:${C.red};border:1px solid rgba(224,96,96,.25)}
@@ -153,13 +153,13 @@ const css = `
   .quad-card{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;
     padding:12px 10px;text-align:center;transition:border-color .2s}
   .quad-card:hover{border-color:${C.cuBlue}}
-  .quad-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;
+  .quad-label{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.12em;
     text-transform:uppercase;color:${C.dim};margin-bottom:4px}
   .quad-rec{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1}
   .quad-rec.q1{color:#5aabff} .quad-rec.q2{color:${C.green}}
   .quad-rec.q3{color:${C.dim}} .quad-rec.q4{color:${C.cuGray}}
   .quad-desc{font-family:'IBM Plex Mono',monospace;font-size:8px;color:${C.dim};margin-top:3px;line-height:1.4}
-  .quad-note{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};
+  .quad-note{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim};
     margin:6px 0 28px;font-style:italic;line-height:1.5}
 
   .links-section{margin-bottom:28px}
@@ -170,19 +170,19 @@ const css = `
   .link-card:hover{background:${C.surface2};border-color:${C.cuBlue};transform:translateY(-1px)}
   .link-icon{font-size:16px;flex-shrink:0}
   .link-info{min-width:0}
-  .link-name{font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.white};
+  .link-name{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.white};
     font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .link-desc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};margin-top:1px}
+  .link-desc{font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.dim};margin-top:1px}
 
   .error-box{background:rgba(224,96,96,.1);border:1px solid rgba(224,96,96,.3);border-radius:4px;
-    padding:14px 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.red};margin-bottom:24px}
+    padding:14px 18px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:${C.red};margin-bottom:24px}
 
-  .footnote{font-family:'IBM Plex Mono',monospace;font-size:10px;color:${C.dim};
+  .footnote{font-family:'IBM Plex Mono',monospace;font-size:14px;color:${C.dim};
     padding-top:16px;border-top:1px solid ${C.surface3};line-height:1.8}
   .footnote a{color:${C.cuLight};text-decoration:none}
   .footnote a:hover{color:${C.white}}
 
-  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:14px;
     color:${C.dim};padding-top:24px;line-height:2}
   footer a{color:${C.cuLight};text-decoration:none}
 `;
@@ -244,7 +244,7 @@ function Panel({ d, isWomen, loading }) {
     { label:"Away",     val:fmt(d?.road),    sub:"Away record",          cls:"" },
     { label:"Neutral",  val:fmt(d?.neutral), sub:"Neutral sites",        cls:"" },
     { label:"Last 10",  val:fmt(d?.last10),  sub:"End of season",
-      cls: d?.last10?.startsWith("7") || d?.last10?.startsWith("8") || d?.last10?.startsWith("9") || d?.last10?.startsWith("10") ? "good sm" : "bad sm" },
+      cls: (() => { const w = parseInt((d?.last10 || "0").split("-")[0]); return (w >= 6 ? "good" : "bad") + " sm"; })() },
   ];
 
   const sheetItems = [
