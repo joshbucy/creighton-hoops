@@ -1,0 +1,515 @@
+import { useState, useEffect } from "react";
+
+const C = {
+  cuBlue:      "#005CA9",
+  cuNavy:      "#00235D",
+  cuLight:     "#6CADDE",
+  cuGray:      "#828282",
+  cuLightGray: "#C8C8C8",
+  bg:          "#00112b",
+  surface:     "#011535",
+  surface2:    "#021f4a",
+  surface3:    "#032b66",
+  text:        "#ddeeff",
+  dim:         "#7aa8d4",
+  green:       "#5cba85",
+  red:         "#e06060",
+  amber:       "#e8b84b",
+  white:       "#ffffff",
+};
+
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:${C.bg};font-family:'IBM Plex Sans',sans-serif;color:${C.text};min-height:100vh}
+  .app{min-height:100vh;position:relative;overflow-x:hidden}
+  .app::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(ellipse 70% 50% at 15% 0%,rgba(0,92,169,.25) 0%,transparent 55%),
+               radial-gradient(ellipse 50% 70% at 85% 100%,rgba(0,35,93,.2) 0%,transparent 55%)}
+  .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 20px 80px}
+
+  header{text-align:center;padding:40px 0 28px}
+  .kicker{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+    letter-spacing:.2em;text-transform:uppercase;color:${C.cuLight};
+    background:rgba(108,173,222,.1);border:1px solid rgba(108,173,222,.3);
+    padding:5px 16px;border-radius:2px;margin-bottom:16px;animation:pulse 3s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(108,173,222,.3)}50%{box-shadow:0 0 16px 2px rgba(108,173,222,.18)}}
+  .mascot{font-size:44px;display:block;margin-bottom:6px;filter:drop-shadow(0 0 20px rgba(0,92,169,.8));animation:float 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,8vw,74px);letter-spacing:.03em;line-height:1;
+    color:${C.white};text-shadow:0 0 50px rgba(0,92,169,.7)}
+  h1 em{color:${C.cuLight};font-style:normal}
+  .h1sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,3vw,24px);letter-spacing:.15em;color:${C.dim};margin-top:4px}
+  .updated{font-family:'IBM Plex Mono',monospace;font-size:10px;color:${C.dim};margin-top:10px;
+    display:flex;align-items:center;justify-content:center;gap:6px}
+  .updated::before{content:'●';color:${C.green};font-size:8px}
+
+  .divider{height:1px;opacity:.5;margin:20px 0;
+    background:linear-gradient(90deg,transparent,${C.cuNavy},${C.cuBlue},${C.cuLight},${C.cuBlue},${C.cuNavy},transparent)}
+
+  .tabs{display:flex;gap:0;margin:24px 0 32px;border:1px solid ${C.surface3};border-radius:6px;overflow:hidden}
+  .tab{flex:1;padding:14px 20px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;
+    text-align:center;cursor:pointer;border:none;background:${C.surface};color:${C.dim};transition:all .2s}
+  .tab:first-child{border-right:1px solid ${C.surface3}}
+  .tab.active{background:linear-gradient(135deg,${C.cuNavy},${C.cuBlue});color:${C.white};
+    text-shadow:0 0 20px rgba(108,173,222,.4)}
+  .tab:hover:not(.active){background:${C.surface2};color:${C.cuLight}}
+  .tab-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;
+    padding:2px 7px;border-radius:10px;margin-left:8px;vertical-align:middle;letter-spacing:.05em}
+  .tab-badge.crown{background:rgba(232,184,75,.15);color:${C.amber};border:1px solid rgba(232,184,75,.3)}
+  .tab-badge.net{background:rgba(108,173,222,.12);color:${C.cuLight};border:1px solid rgba(108,173,222,.25)}
+
+  /* Loading skeleton */
+  .skeleton{background:linear-gradient(90deg,${C.surface2} 25%,${C.surface3} 50%,${C.surface2} 75%);
+    background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:3px;color:transparent!important}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:${C.white};
+    margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid ${C.surface3};
+    display:flex;align-items:center;gap:8px}
+  h2::before{content:'';width:4px;height:18px;border-radius:2px;flex-shrink:0;
+    background:linear-gradient(to bottom,${C.cuBlue},${C.cuLight})}
+
+  /* AI SUMMARY BANNER */
+  .summary-banner{border-radius:5px;padding:14px 18px;margin-bottom:24px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,rgba(0,92,169,.22),rgba(0,35,93,.18));border:1px solid rgba(108,173,222,.4)}
+  .summary-banner.ended{background:linear-gradient(135deg,rgba(40,40,80,.35),rgba(0,35,93,.2));border:1px solid rgba(130,130,160,.3)}
+  .summary-banner::after{content:'🏀';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:30px;opacity:.15}
+  .summary-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+    color:${C.cuLight};margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .summary-label.ended{color:${C.cuLightGray}}
+  .ai-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:${C.cuLight};
+    animation:pulse-dot 2s ease-in-out infinite}
+  @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .summary-text{font-size:13px;line-height:1.6;color:${C.text}}
+  .summary-text strong{color:${C.white}}
+
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:10px;margin-bottom:28px}
+  .stat-card{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;
+    padding:13px 10px;text-align:center;transition:border-color .2s}
+  .stat-card:hover{border-color:${C.cuBlue}}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;
+    text-transform:uppercase;color:${C.dim};margin-bottom:4px}
+  .stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1;color:${C.white}}
+  .stat-val.good{color:${C.cuLight}} .stat-val.bad{color:${C.red}} .stat-val.amber{color:${C.amber}}
+  .stat-val.sm{font-size:15px;padding-top:4px;line-height:1.3}
+  .stat-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};margin-top:2px}
+
+  .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+  @media(max-width:520px){.metrics-grid{grid-template-columns:1fr}}
+  .metric-block{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;overflow:hidden}
+  .metric-block-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;
+    text-transform:uppercase;color:${C.dim};padding:8px 12px;border-bottom:1px solid ${C.surface3};
+    background:rgba(0,35,93,.4)}
+  .metric-row{display:flex;justify-content:space-between;align-items:center;
+    padding:7px 12px;border-bottom:1px solid rgba(3,43,102,.6);transition:background .15s}
+  .metric-row:last-child{border-bottom:none}
+  .metric-row:hover{background:${C.surface2}}
+  .metric-name{font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.dim}}
+  .metric-val{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:${C.white};text-align:right}
+  .metric-val.good{color:${C.cuLight}} .metric-val.ok{color:${C.cuLightGray}}
+  .metric-val.bad{color:${C.red}} .metric-val.amber{color:${C.amber}} .metric-val.dim{color:${C.dim};font-weight:400}
+  .metric-note{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};
+    padding:6px 12px;border-top:1px solid rgba(3,43,102,.4);font-style:italic;line-height:1.5}
+
+  .results-table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:28px}
+  .results-table thead tr{border-bottom:1px solid ${C.surface3}}
+  .results-table th{padding:7px 12px;text-align:left;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    color:${C.dim};font-weight:600}
+  .results-table th:last-child{text-align:right}
+  .results-table td{padding:8px 12px;border-bottom:1px solid rgba(3,43,102,.5)}
+  .results-table tr:last-child td{border-bottom:none}
+  .results-table tr:hover td{background:${C.surface}}
+  .results-table td.date{color:${C.dim};font-size:10px;white-space:nowrap}
+  .results-table td.opp{color:${C.text};font-weight:600}
+  .results-table td.opp .ctx{font-weight:400;color:${C.dim};font-size:10px;margin-left:5px}
+  .results-table td.score{text-align:right;white-space:nowrap}
+  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;
+    padding:2px 7px;border-radius:3px;margin-right:5px}
+  .pill.w{background:rgba(91,186,133,.18);color:${C.green};border:1px solid rgba(91,186,133,.3)}
+  .pill.l{background:rgba(224,96,96,.15);color:${C.red};border:1px solid rgba(224,96,96,.25)}
+
+  .quad-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
+  @media(max-width:480px){.quad-grid{grid-template-columns:1fr 1fr}}
+  .quad-card{background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;
+    padding:12px 10px;text-align:center;transition:border-color .2s}
+  .quad-card:hover{border-color:${C.cuBlue}}
+  .quad-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;
+    text-transform:uppercase;color:${C.dim};margin-bottom:4px}
+  .quad-rec{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1}
+  .quad-rec.q1{color:#5aabff} .quad-rec.q2{color:${C.green}}
+  .quad-rec.q3{color:${C.dim}} .quad-rec.q4{color:${C.cuGray}}
+  .quad-desc{font-family:'IBM Plex Mono',monospace;font-size:8px;color:${C.dim};margin-top:3px;line-height:1.4}
+  .quad-note{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};
+    margin:6px 0 28px;font-style:italic;line-height:1.5}
+
+  .links-section{margin-bottom:28px}
+  .links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+  .link-card{display:flex;align-items:center;gap:10px;padding:10px 14px;
+    background:${C.surface};border:1px solid ${C.surface3};border-radius:4px;
+    text-decoration:none;transition:all .2s}
+  .link-card:hover{background:${C.surface2};border-color:${C.cuBlue};transform:translateY(-1px)}
+  .link-icon{font-size:16px;flex-shrink:0}
+  .link-info{min-width:0}
+  .link-name{font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.white};
+    font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .link-desc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:${C.dim};margin-top:1px}
+
+  .error-box{background:rgba(224,96,96,.1);border:1px solid rgba(224,96,96,.3);border-radius:4px;
+    padding:14px 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:${C.red};margin-bottom:24px}
+
+  .footnote{font-family:'IBM Plex Mono',monospace;font-size:10px;color:${C.dim};
+    padding-top:16px;border-top:1px solid ${C.surface3};line-height:1.8}
+  .footnote a{color:${C.cuLight};text-decoration:none}
+  .footnote a:hover{color:${C.white}}
+
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    color:${C.dim};padding-top:24px;line-height:2}
+  footer a{color:${C.cuLight};text-decoration:none}
+`;
+
+// ── Static link definitions (don't need to be in data.json) ──────────────────
+const MEN_LINKS = [
+  { icon:"🧮", name:"Warren Nolan MBB",  desc:"Team page, NET, quadrants",    url:"https://www.warrennolan.com/basketball/2026/schedule/Creighton" },
+  { icon:"📋", name:"WN NET Team Sheet", desc:"Full NET team sheet",           url:"https://www.warrennolan.com/basketball/2026/team-net-sheet?team=Creighton" },
+  { icon:"📊", name:"ESPN Team Page",    desc:"Scores, stats, news",           url:"https://www.espn.com/mens-college-basketball/team/_/id/156/creighton-bluejays" },
+  { icon:"🗓️", name:"ESPN Schedule",     desc:"Full schedule & results",        url:"https://www.espn.com/mens-college-basketball/team/schedule/_/id/156/creighton-bluejays" },
+  { icon:"📈", name:"Bart Torvik",       desc:"Advanced metrics & T-Rank",     url:"https://barttorvik.com/team.php?team=Creighton&year=2026" },
+  { icon:"📉", name:"KenPom",            desc:"Efficiency ratings (paywall)",   url:"https://kenpom.com/" },
+  { icon:"🎯", name:"WN NET Rankings",   desc:"Full men's NET list",            url:"https://www.warrennolan.com/basketball/2026/net" },
+  { icon:"📡", name:"ESPN BPI / SOR",    desc:"Resume & strength of record",    url:"https://www.espn.com/mens-college-basketball/bpi/_/view/resume/group/7" },
+  { icon:"🏆", name:"Bracket Matrix",    desc:"Aggregated bracketology",        url:"http://bracketmatrix.com" },
+  { icon:"🏀", name:"CBS Sports",        desc:"News, scores, standings",        url:"https://www.cbssports.com/college-basketball/teams/CREIGH/creighton-bluejays/" },
+  { icon:"🐦", name:"CU Athletics",      desc:"Official team site",             url:"https://gocreighton.com/sports/mens-basketball" },
+  { icon:"📰", name:"Sports Reference",  desc:"Full stats & game log",          url:"https://www.sports-reference.com/cbb/schools/creighton/men/2026-schedule.html" },
+];
+
+const WOMEN_LINKS = [
+  { icon:"🧮", name:"Warren Nolan WBB",  desc:"Team page, NET, quadrants",     url:"https://www.warrennolan.com/basketballw/2026/schedule/Creighton" },
+  { icon:"📋", name:"WN NET Team Sheet", desc:"Full NET team sheet",            url:"https://www.warrennolan.com/basketballw/2026/team-net-sheet?team=Creighton" },
+  { icon:"📊", name:"ESPN Team Page",    desc:"Scores, stats, news",            url:"https://www.espn.com/womens-college-basketball/team/_/id/156/creighton-bluejays" },
+  { icon:"🗓️", name:"ESPN Schedule",     desc:"Full schedule & results",         url:"https://www.espn.com/womens-college-basketball/team/schedule/_/id/156/creighton-bluejays" },
+  { icon:"🎯", name:"WN NET Rankings",   desc:"Full women's NET list",           url:"https://www.warrennolan.com/basketballw/2026/net" },
+  { icon:"📈", name:"Her Hoop Stats",    desc:"Advanced women's metrics",        url:"https://herhoopstats.com/stats/ncaa/team/creighton-bluejays/" },
+  { icon:"📡", name:"ESPN BPI (Women)",  desc:"Power index & resume",            url:"https://www.espn.com/womens-college-basketball/bpi" },
+  { icon:"🏆", name:"Big East Standings",desc:"Conference standings",            url:"https://www.bigeast.com/standings?path=wbball" },
+  { icon:"🏀", name:"CBS Sports",        desc:"News, scores, standings",         url:"https://www.cbssports.com/college-basketball/teams/CREIGH/creighton-bluejays/" },
+  { icon:"🐦", name:"CU Athletics",      desc:"Official team site",              url:"https://gocreighton.com/sports/womens-basketball" },
+  { icon:"📰", name:"Sports Reference",  desc:"Full stats & game log",           url:"https://www.sports-reference.com/cbb/schools/creighton/women/2026-schedule.html" },
+  { icon:"🎯", name:"NCAA NET (Women)",  desc:"Official women's NET rankings",   url:"https://www.ncaa.com/rankings/basketball-women/d1/ncaa-womens-basketball-net-rankings" },
+];
+
+// ── Helper: format a W-L string from "15-17" → "15–17" ──────────────────────
+const fmt = (s) => (s || "N/A").replace(/-/g, "–");
+
+// ── Helper: format timestamp ──────────────────────────────────────────────────
+function fmtUpdated(iso) {
+  if (!iso) return "Unknown";
+  try {
+    return new Date(iso).toLocaleString("en-US", {
+      month: "short", day: "numeric", year: "numeric",
+      hour: "numeric", minute: "2-digit", timeZoneName: "short",
+    });
+  } catch (_) { return iso; }
+}
+
+// ── Panel ─────────────────────────────────────────────────────────────────────
+function Panel({ d, isWomen, loading }) {
+  const sk = (val) => loading ? <span className="skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span> : val;
+  const isMissingPostseason = !isWomen; // men have Crown info; adjust as needed
+
+  const glanceItems = [
+    { label:"Overall",  val:fmt(d?.overall), sub:"Final record",         cls:"" },
+    { label:"Big East", val:fmt(d?.conf),    sub:"Conference record",    cls:"" },
+    { label:"Home",     val:fmt(d?.home),    sub:"Home record",          cls:"" },
+    { label:"Away",     val:fmt(d?.road),    sub:"Away record",          cls:"" },
+    { label:"Neutral",  val:fmt(d?.neutral), sub:"Neutral sites",        cls:"" },
+    { label:"Last 10",  val:fmt(d?.last10),  sub:"End of season",
+      cls: d?.last10?.startsWith("7") || d?.last10?.startsWith("8") || d?.last10?.startsWith("9") || d?.last10?.startsWith("10") ? "good sm" : "bad sm" },
+  ];
+
+  const sheetItems = [
+    { name:"NET",          val:d?.net          || "N/A", cls:"ok" },
+    { name:"RPI",          val:d?.rpi          || "N/A", cls:"ok" },
+    { name:"ELO",          val:d?.elo          || "N/A", cls:"ok" },
+    { name:"SOS",          val:d?.sos          || "N/A", cls:"ok" },
+    { name:"Non-Conf RPI", val:d?.nonconf_rpi  || "N/A", cls:"dim" },
+    { name:"Non-Conf SOS", val:d?.nonconf_sos  || "N/A", cls:"dim" },
+  ];
+
+  const statusItems = isWomen ? [
+    { name:"NCAA Tournament", val:"Out",                cls:"bad" },
+    { name:"NIT",             val:"Not selected",      cls:"bad" },
+    { name:"WBIT",            val:"Not selected",      cls:"bad" },
+    { name:"Postseason",      val:"None",              cls:"bad" },
+    { name:"Streak",          val:d?.streak || "N/A",  cls: (d?.streak||"").startsWith("W") ? "good" : "bad" },
+  ] : [
+    { name:"NCAA Tournament",  val:"Out",              cls:"bad" },
+    { name:"NIT",              val:"Not selected",     cls:"bad" },
+    { name:"CBB Crown",        val:"✓ Selected",       cls:"good" },
+    { name:"Crown Opponent",   val:"Rutgers",          cls:"" },
+    { name:"Crown Date",       val:"Apr 2 · FS1",      cls:"amber" },
+    { name:"Streak",           val:d?.streak || "N/A", cls: (d?.streak||"").startsWith("W") ? "good" : "bad" },
+  ];
+
+  const quads = [
+    { label:"Quad 1", rec:fmt(d?.q1_net), cls:"q1", desc:"Home 1–30\nNeutral 1–50\nAway 1–75" },
+    { label:"Quad 2", rec:fmt(d?.q2_net), cls:"q2", desc:"Home 31–75\nNeutral 51–100\nAway 76–135" },
+    { label:"Quad 3", rec:fmt(d?.q3_net), cls:"q3", desc:"Home 76–160\nNeutral 101–200\nAway 136–240" },
+    { label:"Quad 4", rec:fmt(d?.q4_net), cls:"q4", desc:"Home 161+\nNeutral 201+\nAway 241+" },
+  ];
+
+  const recent = d?.recent_results || [];
+  const links  = isWomen ? WOMEN_LINKS : MEN_LINKS;
+
+  return (
+    <div>
+      {/* AI-Generated Summary Banner */}
+      <div className={`summary-banner ${isWomen ? "ended" : ""}`}>
+        <div className={`summary-label ${isWomen ? "ended" : ""}`}>
+          <span className="ai-dot" /> AI Season Summary
+        </div>
+        <div className="summary-text">
+          {loading
+            ? <span className="skeleton">Generating summary from live data...</span>
+            : (d?.summary || "Summary unavailable — run scraper.py to generate.")
+          }
+        </div>
+      </div>
+
+      {/* At A Glance */}
+      <h2>At A Glance</h2>
+      <div className="stat-row">
+        {glanceItems.map(({ label, val, sub, cls }) => (
+          <div className="stat-card" key={label}>
+            <div className="stat-label">{label}</div>
+            <div className={`stat-val ${cls}`}>{sk(val)}</div>
+            <div className="stat-sub">{sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Last 5 Games */}
+      <h2>Last 5 Games</h2>
+      <table className="results-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Opponent</th>
+            <th style={{textAlign:"right"}}>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {loading
+            ? [1,2,3,4,5].map(i => (
+                <tr key={i}>
+                  <td className="date"><span className="skeleton">Mar 00</span></td>
+                  <td className="opp"><span className="skeleton">Opponent Name</span></td>
+                  <td className="score"><span className="skeleton">W 99–99</span></td>
+                </tr>
+              ))
+            : recent.length > 0
+              ? recent.map(({ date, opponent, wl, score, context }, i) => (
+                  <tr key={i}>
+                    <td className="date">{date}</td>
+                    <td className="opp">
+                      {opponent}
+                      {context && <span className="ctx">{context}</span>}
+                    </td>
+                    <td className="score">
+                      <span className={`pill ${wl.toLowerCase()}`}>{wl}</span>
+                      {score.replace(/-/g, "–")}
+                    </td>
+                  </tr>
+                ))
+              : <tr><td colSpan={3} style={{color:C.dim,fontFamily:"'IBM Plex Mono',monospace",fontSize:11,padding:"12px"}}>No results available</td></tr>
+          }
+        </tbody>
+      </table>
+
+      {/* Team Metrics */}
+      <h2>Team Metrics</h2>
+      <div className="metrics-grid">
+        <div className="metric-block">
+          <div className="metric-block-title">Rankings &amp; Ratings</div>
+          {sheetItems.map(({ name, val, cls }) => (
+            <div className="metric-row" key={name}>
+              <span className="metric-name">{name}</span>
+              <span className={`metric-val ${cls}`}>{sk(val)}</span>
+            </div>
+          ))}
+          <div className="metric-note">
+            Source: warrennolan.com · KPI, BPI, KenPom &amp; Torvik via their own sites
+          </div>
+        </div>
+
+        <div className="metric-block">
+          <div className="metric-block-title">{isWomen ? "Season Summary" : "Postseason Status"}</div>
+          {statusItems.map(({ name, val, cls }) => (
+            <div className="metric-row" key={name}>
+              <span className="metric-name">{name}</span>
+              <span className={`metric-val ${cls}`}>{sk(val)}</span>
+            </div>
+          ))}
+          <div className="metric-note">
+            {isWomen
+              ? "Source: gocreighton.com & warrennolan.com"
+              : "Crown QF at MGM Grand Garden Arena · SF/Final at T-Mobile Arena Apr 4–5"}
+          </div>
+        </div>
+      </div>
+
+      {/* Quadrant Record */}
+      <h2>Quadrant Record (NET)</h2>
+      <div className="quad-grid">
+        {quads.map(({ label, rec, cls, desc }) => (
+          <div className="quad-card" key={label}>
+            <div className="quad-label">{label}</div>
+            <div className={`quad-rec ${cls}`}>{sk(rec)}</div>
+            <div className="quad-desc" style={{ whiteSpace:"pre-line" }}>{desc}</div>
+          </div>
+        ))}
+      </div>
+      <div className="quad-note">Source: warrennolan.com NET quadrant splits</div>
+
+      {/* Live Data Sources */}
+      <div className="links-section">
+        <h2>Live Data Sources</h2>
+        <div className="links-grid">
+          {links.map(l => (
+            <a key={l.name} href={l.url} target="_blank" rel="noopener noreferrer" className="link-card">
+              <span className="link-icon">{l.icon}</span>
+              <div className="link-info">
+                <div className="link-name">{l.name}</div>
+                <div className="link-desc">{l.desc}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── App ───────────────────────────────────────────────────────────────────────
+export default function App() {
+  const [tab,       setTab]       = useState("men");
+  const [data,      setData]      = useState(null);
+  const [loading,   setLoading]   = useState(true);
+  const [error,     setError]     = useState(null);
+
+  useEffect(() => {
+    fetch("data.json")
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(d => { setData(d); setLoading(false); })
+      .catch(e => {
+        // In Claude artifact sandbox, fetch is blocked — fall back to embedded data
+        console.warn("Could not fetch data.json, using embedded fallback:", e.message);
+        setData(FALLBACK_DATA);
+        setLoading(false);
+      });
+  }, []);
+
+  const menNet    = data?.men?.net    || "—";
+  const womenNet  = data?.women?.net  || "—";
+  const updatedAt = data?.updated_utc ? fmtUpdated(data.updated_utc) : "Loading...";
+
+  return (
+    <>
+      <style>{css}</style>
+      <div className="app">
+        <div className="wrap">
+
+          <header>
+            <div className="kicker">🐦 Bluejay Basketball Hub · 2025–26</div>
+            <span className="mascot">🐦</span>
+            <h1><em>Creighton</em> Bluejays</h1>
+            <div className="h1sub">Men's &amp; Women's Basketball</div>
+            <div className="updated">
+              {loading ? "Loading live data..." : `Data updated ${updatedAt}`}
+            </div>
+          </header>
+
+          <div className="divider" />
+
+          {error && <div className="error-box">⚠ {error}</div>}
+
+          <div className="tabs">
+            <button className={`tab ${tab==="men"?"active":""}`} onClick={() => setTab("men")}>
+              Men's <span className="tab-badge crown">CBB Crown</span>
+            </button>
+            <button className={`tab ${tab==="women"?"active":""}`} onClick={() => setTab("women")}>
+              Women's <span className="tab-badge net">NET #{womenNet}</span>
+            </button>
+          </div>
+
+          {tab === "men"
+            ? <Panel d={data?.men}   isWomen={false} loading={loading} />
+            : <Panel d={data?.women} isWomen={true}  loading={loading} />
+          }
+
+          <div className="footnote">
+            <strong>Data pipeline:</strong> Scraped daily from <a href="https://www.warrennolan.com" target="_blank">warrennolan.com</a> via Python · AI summaries generated by Claude (<a href="https://www.anthropic.com" target="_blank">Anthropic</a>)<br />
+            <strong>Men:</strong> Rankings & quadrant splits via Warren Nolan MBB · Recent results via ESPN & gocreighton.com<br />
+            <strong>Women:</strong> Rankings & quadrant splits via Warren Nolan WBB · Record confirmed via gocreighton.com<br />
+            <strong>Inspiration:</strong> <a href="https://nebrasketball.info" target="_blank">nebrasketball.info</a> by Ben Vankat · Not affiliated with Creighton University or the Big East Conference.
+          </div>
+
+        </div>
+
+        <footer>
+          <div className="divider" style={{maxWidth:860,margin:"0 auto 16px"}} />
+          <div>Creighton Bluejays Basketball Hub · 2025–26 Season</div>
+          <div>
+            <a href="https://gocreighton.com/sports/mens-basketball" target="_blank">CU Men's</a>
+            {" · "}
+            <a href="https://gocreighton.com/sports/womens-basketball" target="_blank">CU Women's</a>
+            {" · "}
+            <a href="https://www.warrennolan.com/basketball/2026/index" target="_blank">Warren Nolan MBB</a>
+            {" · "}
+            <a href="https://www.warrennolan.com/basketballw/2026/index" target="_blank">Warren Nolan WBB</a>
+          </div>
+          <div style={{marginTop:8,color:"#0a3060"}}>Go Jays! 🔵⚪</div>
+        </footer>
+      </div>
+    </>
+  );
+}
+
+// ── Embedded fallback data (used in Claude artifact sandbox where fetch is blocked) ──
+const FALLBACK_DATA = {
+  "updated_utc": "2026-03-18T12:00:00+00:00",
+  "men": {
+    "overall": "15-17", "home": "10-6", "road": "4-8", "neutral": "1-3",
+    "conf": "9-11", "last10": "3-7", "streak": "L1",
+    "net": "83", "rpi": "108", "elo": "106", "sos": "52",
+    "nonconf_rpi": "151", "nonconf_sos": "92",
+    "q1_net": "2-8", "q2_net": "3-6", "q3_net": "5-3", "q4_net": "5-0",
+    "summary": "The Bluejays limped to the finish line at 15-17, going 3-7 in their final 10 and falling in the Big East Tournament to Seton Hall, leaving them NET #83 with a 2-8 Q1 record that kept them well outside the NCAA Tournament picture. They head to Las Vegas for the College Basketball Crown as a long shot, but a win over Rutgers on April 2 would at least give the season a postseason chapter worth remembering.",
+    "recent_results": [
+      { "date": "Mar 12", "opponent": "vs Seton Hall",       "wl": "L", "score": "61-72", "context": "Big East Tourney QF" },
+      { "date": "Mar 4",  "opponent": "at Butler",           "wl": "W", "score": "76-59", "context": "Regular Season" },
+      { "date": "Feb 28", "opponent": "vs Providence",       "wl": "L", "score": "76-79", "context": "Regular Season" },
+      { "date": "Feb 25", "opponent": "vs DePaul",           "wl": "L", "score": "71-72", "context": "Regular Season" },
+      { "date": "Feb 22", "opponent": "at #17 St. John's",   "wl": "L", "score": "52-81", "context": "Regular Season" }
+    ]
+  },
+  "women": {
+    "overall": "16-15", "home": "8-6", "road": "6-8", "neutral": "2-1",
+    "conf": "11-9", "last10": "7-3", "streak": "L1",
+    "net": "91", "rpi": "97", "elo": "79", "sos": "58",
+    "nonconf_rpi": "186", "nonconf_sos": "148",
+    "q1_net": "0-5", "q2_net": "1-4", "q3_net": "3-3", "q4_net": "12-3",
+    "summary": "Despite a 16-15 finish and no postseason berth, Creighton's women showed real resilience — going 7-3 in their final 10 games including a Big East Tournament quarterfinal win over Marquette before falling to #1 UConn. The NET #91 ranking and 0-5 Q1 record tell the story of a team that beat who they were supposed to beat but couldn't break through against the conference's elite.",
+    "recent_results": [
+      { "date": "Mar 8",  "opponent": "vs #1 UConn",   "wl": "L", "score": "51-100", "context": "Big East Tourney SF" },
+      { "date": "Mar 7",  "opponent": "vs Marquette",  "wl": "W", "score": "57-44",  "context": "Big East Tourney QF" },
+      { "date": "Mar 1",  "opponent": "at Xavier",     "wl": "W", "score": "73-71",  "context": "Regular Season" },
+      { "date": "Feb 26", "opponent": "vs Providence", "wl": "W", "score": "69-49",  "context": "Regular Season" },
+      { "date": "Feb 22", "opponent": "at #1 UConn",  "wl": "L", "score": "44-95",  "context": "Regular Season" }
+    ]
+  }
+};

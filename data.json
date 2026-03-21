@@ -1,0 +1,59 @@
+{
+  "updated_utc": "2026-03-18T12:00:00+00:00",
+  "men": {
+    "overall": "15-17",
+    "home": "10-6",
+    "road": "4-8",
+    "neutral": "1-3",
+    "conf": "9-11",
+    "last10": "3-7",
+    "streak": "L1",
+    "net": "83",
+    "rpi": "108",
+    "elo": "106",
+    "sos": "52",
+    "nonconf_rpi": "151",
+    "nonconf_sos": "92",
+    "q1_net": "2-8",
+    "q2_net": "3-6",
+    "q3_net": "5-3",
+    "q4_net": "5-0",
+    "postseason_record": "0-1",
+    "summary": "The Bluejays limped to the finish line at 15-17, going 3-7 in their final 10 and falling in the Big East Tournament to Seton Hall, leaving them NET #83 with a 2-8 Q1 record that kept them well outside the NCAA Tournament picture. They head to Las Vegas for the College Basketball Crown as a long shot, but a win over Rutgers on April 2 would at least give the season a postseason chapter worth remembering.",
+    "recent_results": [
+      { "date": "Mar 12", "opponent": "vs Seton Hall", "wl": "L", "score": "61-72", "context": "Big East Tourney QF" },
+      { "date": "Mar 4",  "opponent": "at Butler",     "wl": "W", "score": "76-59", "context": "Regular Season" },
+      { "date": "Feb 28", "opponent": "vs Providence",  "wl": "L", "score": "76-79", "context": "Regular Season" },
+      { "date": "Feb 25", "opponent": "vs DePaul",      "wl": "L", "score": "71-72", "context": "Regular Season" },
+      { "date": "Feb 22", "opponent": "at #17 St. John's", "wl": "L", "score": "52-81", "context": "Regular Season" }
+    ]
+  },
+  "women": {
+    "overall": "16-15",
+    "home": "8-6",
+    "road": "6-8",
+    "neutral": "2-1",
+    "conf": "11-9",
+    "last10": "7-3",
+    "streak": "L1",
+    "net": "91",
+    "rpi": "97",
+    "elo": "79",
+    "sos": "58",
+    "nonconf_rpi": "186",
+    "nonconf_sos": "148",
+    "q1_net": "0-5",
+    "q2_net": "1-4",
+    "q3_net": "3-3",
+    "q4_net": "12-3",
+    "postseason_record": "1-1",
+    "summary": "Despite a 16-15 finish and no postseason berth, Creighton's women showed real resilience — going 7-3 in their final 10 games including a Big East Tournament quarterfinal win over Marquette before falling to #1 UConn. The NET #91 ranking and 0-5 Q1 record tell the story of a team that beat who they were supposed to beat but couldn't break through against the conference's elite.",
+    "recent_results": [
+      { "date": "Mar 8",  "opponent": "vs #1 UConn",  "wl": "L", "score": "51-100", "context": "Big East Tourney SF" },
+      { "date": "Mar 7",  "opponent": "vs Marquette", "wl": "W", "score": "57-44",  "context": "Big East Tourney QF" },
+      { "date": "Mar 1",  "opponent": "at Xavier",    "wl": "W", "score": "73-71",  "context": "Regular Season" },
+      { "date": "Feb 26", "opponent": "vs Providence", "wl": "W", "score": "69-49",  "context": "Regular Season" },
+      { "date": "Feb 22", "opponent": "at #1 UConn",  "wl": "L", "score": "44-95",  "context": "Regular Season" }
+    ]
+  }
+}
