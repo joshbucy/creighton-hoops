@@ -2,16 +2,26 @@ name: Update Basketball Data
 
 on:
   schedule:
-    # Runs at 8 AM Eastern (13:00 UTC)
-    - cron: "0 13 * * *"
-  workflow_dispatch:  # lets you trigger it manually from GitHub
+    # ── In-season: once daily at 8 AM Central ────────────────────────────────
+    # Nov & Dec (CST = UTC-6, so 8 AM Central = 14:00 UTC)
+    - cron: "0 14 * 11,12 *"
+    # Jan, Feb, Mar (CST = UTC-6, so 8 AM Central = 14:00 UTC)
+    - cron: "0 14 * 1,2,3 *"
+
+    # ── Preseason: October 25 at 8 AM Central ─────────────────────────────────
+    - cron: "0 14 25 10 *"
+
+    # ── End of season: April 10 at 8 AM Central ───────────────────────────────
+    - cron: "0 14 10 4 *"
+
+  workflow_dispatch:  # manual trigger from the Actions tab anytime
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # needed to commit data.json back to the repo
+      contents: write
 
     steps:
       - name: Checkout repo
