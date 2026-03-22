@@ -288,7 +288,7 @@ var MEN_HISTORY = [
   ]},
   { title:'Conference Titles', items:[
     { label:'Big East Regular Season', val:'1 title',   years:'2020' },
-    { label:'MVC Regular Season',      val:'15 titles', years:'1923–1943, 1978, 1989, 1991, 2001–2002, 2009, 2013' },
+    { label:'MVC Regular Season',      val:'15 titles', years:'1923, 1924, 1925, 1927, 1930, 1931, 1932, 1935, 1936, 1941, 1942, 1943, 1978, 1989, 1991, 2001, 2002, 2009, 2013' },
     { label:'MVC Tournament',          val:'12 titles', years:'1978, 1981, 1989, 1991, 1999, 2000, 2002, 2003, 2005, 2007, 2012, 2013' }
   ]}
 ];
@@ -538,7 +538,26 @@ function loadAndRender(data) {
 
 fetch('data.json')
   .then(function(r) { return r.json(); })
-  .then(function(data) { loadAndRender(data); })
+  .then(function(data) {
+    // If scraper produced empty/incomplete data, fill gaps from FALLBACK
+    function mergeTeam(scraped, fallback) {
+      var result = {};
+      Object.keys(fallback).forEach(function(k) {
+        var val = scraped[k];
+        // Use scraped value if it's a non-empty, non-null string or a non-empty array
+        if (val !== undefined && val !== null && val !== '' && val !== 'N/A') {
+          result[k] = val;
+        } else {
+          result[k] = fallback[k];
+        }
+      });
+      return result;
+    }
+    data.men   = mergeTeam(data.men   || {}, FALLBACK.men);
+    data.women = mergeTeam(data.women || {}, FALLBACK.women);
+    if (!data.updated_utc) data.updated_utc = FALLBACK.updated_utc;
+    loadAndRender(data);
+  })
   .catch(function() { loadAndRender(FALLBACK); });
 </script>
 </body>
