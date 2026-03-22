@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-03-21T13:40:22.513404+00:00",
+  "updated_utc": "2026-03-22T13:41:52.277322+00:00",
   "men": {
     "overall": "15-17",
     "home": "N/A",
@@ -10,7 +10,7 @@
     "net": "RPI",
     "rpi": "ELO",
     "elo": "Ranking",
-    "sos": "54",
+    "sos": "56",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "streak": "1L",
@@ -20,7 +20,7 @@
     "q4_net": "5-0",
     "recent_results": [],
     "postseason_record": "0-0",
-    "summary": ""
+    "summary": "The Bluejays are struggling through a disappointing 2025-26 campaign with a 15-17 overall record and 9-11 mark in Big East play, coming off their latest loss in what has been a difficult stretch of 3-7 over their last 10 games. With a poor 2-8 record in Quadrant 1 games and a sub-.500 conference record, their postseason prospects appear bleak barring a dramatic turnaround in their remaining games."
   },
   "women": {
     "overall": "16-15",
@@ -42,6 +42,6 @@
     "q4_net": "12-3",
     "recent_results": [],
     "postseason_record": "0-0",
-    "summary": ""
+    "summary": "The Bluejays sit at .500 overall with a 16-15 record but have performed well in Big East play at 11-9, though their 0-5 record against Quadrant 1 opponents significantly hurts their NCAA Tournament resume. Despite a strong 7-3 mark over their last 10 games, their lack of quality wins and struggles away from home (6-8) likely leaves them on the outside looking in for March Madness, making them a candidate for the WNIT instead."
   }
 }
