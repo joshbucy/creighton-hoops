@@ -34,7 +34,8 @@ from bs4 import BeautifulSoup
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-MEN_URL   = "https://www.warrennolan.com/basketball/2026/schedule/Creighton"
+MEN_URL         = "https://www.warrennolan.com/basketball/2026/schedule/Creighton"
+BRACKET_MATRIX  = "http://www.bracketmatrix.com"
 WOMEN_URL = "https://www.warrennolan.com/basketballw/2026/schedule/Creighton"
 OUTPUT    = os.path.join(os.path.dirname(__file__), "data.json")
 
@@ -350,6 +351,73 @@ def push_to_github(filepath: str) -> None:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
+def scrape_bracket_matrix(team: str = "Creighton") -> dict:
+    """
+    Scrape bracketmatrix.com for a team's bracket projection data.
+    Only meaningful January through March during bracket season.
+    Returns dict with keys: bm_status, bm_avg_seed, bm_bracket_count, bm_total_brackets
+    """
+    print(f"  Fetching Bracket Matrix for {team}...")
+    try:
+        soup = fetch(BRACKET_MATRIX)
+        result = {
+            "bm_status":         "N/A",
+            "bm_avg_seed":       "N/A",
+            "bm_bracket_count":  "N/A",
+            "bm_total_brackets": "N/A",
+        }
+
+        # Find the table row for Creighton
+        # Each team row contains the team name in a cell
+        for row in soup.find_all("tr"):
+            cells = row.find_all(["td", "th"])
+            if not cells:
+                continue
+            row_text = text(cells[0])
+            if team.lower() not in row_text.lower():
+                continue
+
+            all_cells = [text(c) for c in cells]
+
+            # Total number of bracketologist columns (excluding header cols)
+            # The matrix has ~5 fixed cols then one per bracketologist
+            # Count non-empty seed values across the row to get bracket_count
+            seed_values = []
+            for val in all_cells[5:]:
+                val = val.strip()
+                if val and re.match(r"^\d{1,2}$", val):
+                    seed_values.append(int(val))
+
+            result["bm_bracket_count"]  = str(len(seed_values))
+            result["bm_total_brackets"] = str(len(all_cells) - 5)
+
+            # Average seed
+            if seed_values:
+                avg = sum(seed_values) / len(seed_values)
+                result["bm_avg_seed"] = f"{avg:.1f}"
+                result["bm_status"]   = "In"
+            else:
+                result["bm_avg_seed"] = "—"
+                result["bm_status"]   = "Out"
+
+            print(f"      → Status: {result['bm_status']}  "
+                  f"Avg seed: {result['bm_avg_seed']}  "
+                  f"Brackets: {result['bm_bracket_count']}/{result['bm_total_brackets']}")
+            return result
+
+        print(f"      → {team} not found in Bracket Matrix table")
+        return result
+
+    except Exception as e:
+        print(f"      WARNING: Bracket Matrix scrape failed — {e}")
+        return {
+            "bm_status":         "N/A",
+            "bm_avg_seed":       "N/A",
+            "bm_bracket_count":  "N/A",
+            "bm_total_brackets": "N/A",
+        }
+
+
 def main() -> None:
     print("=" * 60)
     print("Creighton Bluejays Basketball Hub — Scraper")
@@ -380,7 +448,22 @@ def main() -> None:
         print(f"      ERROR: {e}")
         result["women"] = {}
 
-    # ── Generate AI summaries ──────────────────────────────────────────────
+    # ── Scrape Bracket Matrix (January–March only) ────────────────────────
+    current_month = datetime.now(timezone.utc).month
+    if current_month in [1, 2, 3]:
+        print("\n[2.5/4] Scraping Bracket Matrix (bracket season)...")
+        bm_data = scrape_bracket_matrix("Creighton")
+        result["men"].update(bm_data)
+        print(f"      Status: {bm_data['bm_status']}  "
+              f"Avg seed: {bm_data['bm_avg_seed']}  "
+              f"In {bm_data['bm_bracket_count']} of {bm_data['bm_total_brackets']} brackets")
+    else:
+        print("\n[2.5/4] Bracket Matrix: skipping (not bracket season)")
+        # Clear any stale bracket data from prior season
+        for key in ["bm_status", "bm_avg_seed", "bm_bracket_count", "bm_total_brackets"]:
+            result["men"][key] = "N/A"
+
+    # ── Generate AI summaries ──────────────────────────────────────────────────
     print("\n[3/4] Generating AI summaries via Claude...")
     if result["men"]:
         print("      Generating men's summary...")
