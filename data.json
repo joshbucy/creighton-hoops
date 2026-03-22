@@ -56,7 +56,11 @@
         "score": "52-81",
         "context": "Regular Season"
       }
-    ]
+    ],
+    "bm_status": "N/A",
+    "bm_avg_seed": "N/A",
+    "bm_bracket_count": "N/A",
+    "bm_total_brackets": "N/A"
   },
   "women": {
     "overall": "16-15",
