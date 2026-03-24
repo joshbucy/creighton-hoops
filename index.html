@@ -88,6 +88,10 @@
 
     .tabs { display: flex; margin: 24px 0 32px; border: 1px solid var(--surface3); border-radius: 6px; overflow: hidden; }
     .tab { flex: 1; padding: 14px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: .1em; text-align: center; cursor: pointer; border: none; background: var(--surface); color: var(--dim); transition: all .2s; }
+    @media(max-width:520px) {
+      .tab { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 8px; font-size: 17px; }
+      .tab-badge { margin-left: 0; }
+    }
     .tab:first-child { border-right: 1px solid var(--surface3); }
     .tab.active { background: linear-gradient(135deg,var(--cu-navy),var(--cu-blue)); color: #ffffff; text-shadow: 0 0 20px rgba(108,173,222,.4); }
     .tab:hover:not(.active) { background: var(--surface2); color: var(--cu-light); }
@@ -344,10 +348,10 @@ var WOMEN_LINKS = [
   { icon:'📊', name:'ESPN Team Page',    desc:'Scores, stats, news',            url:'https://www.espn.com/womens-college-basketball/team/_/id/156/creighton-bluejays' },
   { icon:'🗓', name:'ESPN Schedule',     desc:'Full schedule & results',         url:'https://www.espn.com/womens-college-basketball/team/schedule/_/id/156/creighton-bluejays' },
   { icon:'🎯', name:'WN NET Rankings',   desc:"Full women's NET list",           url:'https://www.warrennolan.com/basketballw/2026/net' },
-  { icon:'📈', name:'Her Hoop Stats',    desc:'Advanced women\'s metrics',       url:'https://herhoopstats.com/stats/ncaa/team/creighton-bluejays/' },
-  { icon:'📡', name:'ESPN BPI (Women)',  desc:'Power index & resume',            url:'https://www.espn.com/womens-college-basketball/bpi' },
-  { icon:'🏆', name:'ESPN Bracketology', desc:"Women's tournament projections",  url:'https://www.espn.com/womens-college-basketball/story/_/page/bracketology/ncaa-women-bracketology-2026-march-madness-predictions' },
-  { icon:'🏆', name:'Big East Standings',desc:'Conference standings',            url:'https://www.bigeast.com/standings?path=wbball' },
+  { icon:'📈', name:'Her Hoop Stats',    desc:'Advanced women\'s metrics',       url:'https://herhoopstats.com/stats/ncaa/team/2026/natl/creighton-bluejays-womens-basketball-stats-11e8e149-c76c-a1e2-af82-12df17ae4e1e/' },
+  { icon:'📡', name:'ESPN BPI (Women)',  desc:'Power index & resume',            url:'https://www.espn.com/espn/betting/story/_/id/48219770/espn-2026-tournament-women-bracket-game-odds' },
+  { icon:'🏆', name:'Her Hoop Stats Bracketology', desc:"Women's tournament projections", url:'https://herhoopstats.com/bracketology/' },
+  { icon:'🏆', name:'Big East Standings',desc:'Conference standings',            url:'https://www.bigeast.com/standings.aspx?standings=1124' },
   { icon:'🏀', name:'CBS Sports',        desc:'News, scores, standings',         url:'https://www.cbssports.com/college-basketball/teams/CREIGH/creighton-bluejays/' },
   { icon:'🐦', name:'CU Athletics',      desc:'Official team site',              url:'https://gocreighton.com/sports/womens-basketball' },
   { icon:'📰', name:'Sports Reference',  desc:'Full stats & game log',           url:'https://www.sports-reference.com/cbb/schools/creighton/women/2026-schedule.html' },
