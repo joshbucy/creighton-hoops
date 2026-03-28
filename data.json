@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-03-27T14:42:35.814011+00:00",
+  "updated_utc": "2026-03-28T14:21:26.845237+00:00",
   "men": {
     "overall": "15-17",
     "home": "10-6",
@@ -9,7 +9,7 @@
     "last10": "3-7",
     "streak": "L1",
     "net": "83",
-    "rpi": "105",
+    "rpi": "106",
     "elo": "106",
     "sos": "54",
     "nonconf_rpi": "151",
@@ -23,7 +23,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "The Bluejays find themselves in a disappointing position at 15-17 overall and 9-11 in Big East play, with their NET ranking of 83 and struggles in quality games (2-8 in Quadrant 1) effectively eliminating any realistic NCAA Tournament hopes. With just a 3-7 record over their last 10 games and notable home-road splits (10-6 vs 4-8), this season represents a significant step backward for a program that will likely miss the postseason entirely.",
+    "summary": "The Bluejays find themselves in a disappointing position at 15-17 overall and 9-11 in Big East play, with their 3-7 record over the last 10 games and NET ranking of 83 effectively eliminating any hope of an NCAA Tournament berth. With a poor 2-8 record in Quadrant 1 games and significant struggles on the road (4-8) and neutral sites (1-3), this season represents a major step backward for a program that will likely need to win the Big East Tournament to reach March Madness.",
     "recent_results": [
       {
         "date": "Mar 12",
@@ -71,8 +71,8 @@
     "last10": "7-3",
     "streak": "L1",
     "net": "91",
-    "rpi": "104",
-    "elo": "75",
+    "rpi": "103",
+    "elo": "76",
     "sos": "70",
     "nonconf_rpi": "186",
     "nonconf_sos": "148",
@@ -81,7 +81,7 @@
     "q3_net": "3-3",
     "q4_net": "12-3",
     "ncaaTourney": "Out",
-    "summary": "The Bluejays finished the regular season at 16-15 overall with an 11-9 Big East record, but their 0-5 mark in Quadrant 1 games and NET ranking of 91 likely leaves them on the outside looking in for an NCAA Tournament bid. Despite winning seven of their last ten games before falling 51-100 to top-ranked UConn in what appears to be a conference tournament game, Creighton will need to make a deep postseason run to salvage their March hopes.",
+    "summary": "The Bluejays finished the regular season at 16-15 overall and 11-9 in Big East play, sitting at No. 91 in the NET rankings with an 0-5 record against Quadrant 1 opponents that likely eliminates any NCAA Tournament consideration. Despite a strong 7-3 record over their last 10 games before falling 51-100 to top-ranked UConn in what appears to be a conference tournament game, Creighton will need to make a deep postseason run or settle for an NIT bid given their middling metrics and lack of quality wins.",
     "recent_results": [
       {
         "date": "Mar 8",
