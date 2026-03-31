@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-03-30T14:55:44.982113+00:00",
+  "updated_utc": "2026-03-31T14:53:32.241316+00:00",
   "men": {
     "overall": "15-17",
     "home": "10-6",
@@ -23,7 +23,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "The Bluejays sit at 15-17 overall and 9-11 in Big East play with a disappointing 83 NET ranking and 106 RPI, effectively eliminating them from NCAA Tournament consideration after struggling to just a 2-8 record in Quadrant 1 games. With a 3-7 record over their last 10 games and coming off a loss to Seton Hall, Creighton's focus has shifted to building momentum for next season as their postseason hopes now rest solely on a potential NIT bid.",
+    "summary": "The Bluejays find themselves in a disappointing position at 15-17 overall and 9-11 in Big East play, struggling particularly in quality games with just a 2-8 record against Quadrant 1 opponents and limping to the finish line with a 3-7 mark over their last 10 contests. With a NET ranking of 83 and having just suffered a season-ending loss to Seton Hall, Creighton's postseason hopes appear to be limited to potential consideration for secondary tournaments like the NIT, as their resume lacks the signature wins needed for NCAA Tournament consideration.",
     "recent_results": [
       {
         "date": "Mar 12",
@@ -72,7 +72,7 @@
     "streak": "L1",
     "net": "91",
     "rpi": "101",
-    "elo": "76",
+    "elo": "77",
     "sos": "70",
     "nonconf_rpi": "186",
     "nonconf_sos": "148",
@@ -81,7 +81,7 @@
     "q3_net": "3-3",
     "q4_net": "12-3",
     "ncaaTourney": "Out",
-    "summary": "The Bluejays finished the regular season with a 16-15 overall record and 11-9 in Big East play, but their 0-5 record against Quadrant 1 opponents and NET ranking of 91 likely leaves them on the outside looking in for an NCAA Tournament bid. Despite closing strong with a 7-3 record over their last 10 games before falling 51-100 to top-ranked UConn in what appears to be their conference tournament finale, Creighton will need to make a deep postseason run or settle for a potential NIT berth.",
+    "summary": "The Bluejays finished the regular season at 16-15 overall and 11-9 in Big East play, sitting at 91 in the NET rankings with an 0-5 record against Quadrant 1 opponents that severely damages their NCAA Tournament resume. Despite a strong 7-3 record over their last 10 games before falling 51-100 to top-ranked UConn in their conference tournament opener, Creighton's lack of quality wins and sub-100 metrics likely relegates them to the WNIT for postseason play.",
     "recent_results": [
       {
         "date": "Mar 8",
