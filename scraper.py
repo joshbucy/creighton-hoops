@@ -30,10 +30,10 @@ from bs4 import BeautifulSoup
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-MEN_SCHEDULE_URL    = "https://www.warrennolan.com/basketball/2026/schedule/Creighton"
-MEN_SHEET_URL       = "https://www.warrennolan.com/basketball/2026/team-net-sheet?team=Creighton"
-WOMEN_SCHEDULE_URL  = "https://www.warrennolan.com/basketballw/2026/schedule/Creighton"
-WOMEN_SHEET_URL     = "https://www.warrennolan.com/basketballw/2026/team-net-sheet?team=Creighton"
+MEN_SCHEDULE_URL    = "https://www.warrennolan.com/basketball/2027/schedule/Creighton"
+MEN_SHEET_URL       = "https://www.warrennolan.com/basketball/2027/team-net-sheet?team=Creighton"
+WOMEN_SCHEDULE_URL  = "https://www.warrennolan.com/basketballw/2027/schedule/Creighton"
+WOMEN_SHEET_URL     = "https://www.warrennolan.com/basketballw/2027/team-net-sheet?team=Creighton"
 BRACKET_MATRIX      = "http://www.bracketmatrix.com"
 OUTPUT              = os.path.join(os.path.dirname(__file__), "data.json")
 
