@@ -1,123 +1,51 @@
 {
-  "updated_utc": "2026-04-10T14:41:34.347658+00:00",
+  "updated_utc": "2026-10-25T12:00:00+00:00",
   "men": {
-    "overall": "16-18",
-    "home": "10-6",
-    "road": "4-8",
-    "neutral": "2-4",
-    "conf": "9-11",
-    "last10": "3-7",
-    "streak": "L1",
-    "net": "83",
-    "rpi": "108",
-    "elo": "104",
-    "sos": "54",
-    "nonconf_rpi": "151",
-    "nonconf_sos": "92",
-    "q1_net": "2-8",
-    "q2_net": "3-7",
-    "q3_net": "6-3",
-    "q4_net": "5-0",
+    "overall": "0-0",
+    "home": "0-0",
+    "road": "0-0",
+    "neutral": "0-0",
+    "conf": "0-0",
+    "last10": "0-0",
+    "streak": "N/A",
+    "net": "N/A",
+    "rpi": "N/A",
+    "elo": "N/A",
+    "sos": "N/A",
+    "nonconf_rpi": "N/A",
+    "nonconf_sos": "N/A",
+    "q1_net": "0-0",
+    "q2_net": "0-0",
+    "q3_net": "0-0",
+    "q4_net": "0-0",
     "ncaaTourney": "Out",
     "bm_status": "N/A",
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "The Bluejays sit at 16-18 overall and 9-11 in Big East play with a concerning 3-7 record over their last 10 games and a NET ranking of 83, effectively eliminating any NCAA Tournament hopes. With a poor 2-8 record against Quadrant 1 opponents and significant struggles on the road (4-8) and neutral sites (2-4), Creighton's postseason prospects are likely limited to the NIT at best.",
-    "recent_results": [
-      {
-        "date": "Mar 12",
-        "opponent": "vs Seton Hall",
-        "wl": "L",
-        "score": "61-72",
-        "context": "Big East Tourney QF"
-      },
-      {
-        "date": "Mar 4",
-        "opponent": "at Butler",
-        "wl": "W",
-        "score": "76-59",
-        "context": "Regular Season"
-      },
-      {
-        "date": "Feb 28",
-        "opponent": "vs Providence",
-        "wl": "L",
-        "score": "76-79",
-        "context": "Regular Season"
-      },
-      {
-        "date": "Feb 25",
-        "opponent": "vs DePaul",
-        "wl": "L",
-        "score": "71-72",
-        "context": "Regular Season"
-      },
-      {
-        "date": "Feb 22",
-        "opponent": "at #17 St. John's",
-        "wl": "L",
-        "score": "52-81",
-        "context": "Regular Season"
-      }
-    ]
+    "summary": "Preseason \u2014 the 2026-27 Creighton men's basketball season has not yet tipped off. Check back once games begin for live rankings and results.",
+    "recent_results": []
   },
   "women": {
-    "overall": "16-15",
-    "home": "8-6",
-    "road": "6-8",
-    "neutral": "2-1",
-    "conf": "11-9",
-    "last10": "7-3",
-    "streak": "L1",
-    "net": "91",
-    "rpi": "103",
-    "elo": "77",
-    "sos": "70",
-    "nonconf_rpi": "186",
-    "nonconf_sos": "148",
-    "q1_net": "0-5",
-    "q2_net": "1-4",
-    "q3_net": "3-3",
-    "q4_net": "12-3",
+    "overall": "0-0",
+    "home": "0-0",
+    "road": "0-0",
+    "neutral": "0-0",
+    "conf": "0-0",
+    "last10": "0-0",
+    "streak": "N/A",
+    "net": "N/A",
+    "rpi": "N/A",
+    "elo": "N/A",
+    "sos": "N/A",
+    "nonconf_rpi": "N/A",
+    "nonconf_sos": "N/A",
+    "q1_net": "0-0",
+    "q2_net": "0-0",
+    "q3_net": "0-0",
+    "q4_net": "0-0",
     "ncaaTourney": "Out",
-    "summary": "The Bluejays finished the regular season with a 16-15 overall record and 11-9 in Big East play, but their 0-5 record in Quadrant 1 games and NET ranking of 91 puts them squarely on the NCAA Tournament bubble. Despite playing well recently with a 7-3 record over their last 10 games, the lopsided losses to top-ranked UConn (51-100 and 44-95) highlight the gap they'll need to bridge in the Big East Tournament to secure an at-large bid.",
-    "recent_results": [
-      {
-        "date": "Mar 8",
-        "opponent": "vs #1 UConn",
-        "wl": "L",
-        "score": "51-100",
-        "context": "Big East Tourney SF"
-      },
-      {
-        "date": "Mar 7",
-        "opponent": "vs Marquette",
-        "wl": "W",
-        "score": "57-44",
-        "context": "Big East Tourney QF"
-      },
-      {
-        "date": "Mar 1",
-        "opponent": "at Xavier",
-        "wl": "W",
-        "score": "73-71",
-        "context": "Regular Season"
-      },
-      {
-        "date": "Feb 26",
-        "opponent": "vs Providence",
-        "wl": "W",
-        "score": "69-49",
-        "context": "Regular Season"
-      },
-      {
-        "date": "Feb 22",
-        "opponent": "at #1 UConn",
-        "wl": "L",
-        "score": "44-95",
-        "context": "Regular Season"
-      }
-    ]
+    "summary": "Preseason \u2014 the 2026-27 Creighton women's basketball season has not yet tipped off. Check back once games begin for live rankings and results.",
+    "recent_results": []
   }
 }
