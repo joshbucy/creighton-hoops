@@ -1,17 +1,17 @@
 {
-  "updated_utc": "2026-10-25T12:00:00+00:00",
+  "updated_utc": "2026-10-25T17:19:45.367424+00:00",
   "men": {
     "overall": "0-0",
     "home": "0-0",
     "road": "0-0",
     "neutral": "0-0",
     "conf": "0-0",
-    "last10": "0-0",
+    "last10": "3-7",
     "streak": "N/A",
-    "net": "N/A",
-    "rpi": "N/A",
-    "elo": "N/A",
-    "sos": "N/A",
+    "net": "83",
+    "rpi": "1",
+    "elo": "43",
+    "sos": "1",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "0-0",
@@ -23,7 +23,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "Preseason \u2014 the 2026-27 Creighton men's basketball season has not yet tipped off. Check back once games begin for live rankings and results.",
+    "summary": "",
     "recent_results": []
   },
   "women": {
@@ -45,7 +45,7 @@
     "q3_net": "0-0",
     "q4_net": "0-0",
     "ncaaTourney": "Out",
-    "summary": "Preseason \u2014 the 2026-27 Creighton women's basketball season has not yet tipped off. Check back once games begin for live rankings and results.",
+    "summary": "",
     "recent_results": []
   }
 }
