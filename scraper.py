@@ -30,10 +30,14 @@ from bs4 import BeautifulSoup
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-MEN_SCHEDULE_URL    = "https://www.warrennolan.com/basketball/2027/schedule/Creighton"
-MEN_SHEET_URL       = "https://www.warrennolan.com/basketball/2027/team-net-sheet?team=Creighton"
-WOMEN_SCHEDULE_URL  = "https://www.warrennolan.com/basketballw/2027/schedule/Creighton"
-WOMEN_SHEET_URL     = "https://www.warrennolan.com/basketballw/2027/team-net-sheet?team=Creighton"
+# >>> EACH NEW SEASON: change ONLY this number (season ending year) <<<
+SEASON_END_YEAR     = 2027
+SEASON_LABEL        = f"{SEASON_END_YEAR - 1}-{str(SEASON_END_YEAR)[2:]}"   # e.g. "2026-27"
+
+MEN_SCHEDULE_URL    = f"https://www.warrennolan.com/basketball/{SEASON_END_YEAR}/schedule/Creighton"
+MEN_SHEET_URL       = f"https://www.warrennolan.com/basketball/{SEASON_END_YEAR}/team-net-sheet?team=Creighton"
+WOMEN_SCHEDULE_URL  = f"https://www.warrennolan.com/basketballw/{SEASON_END_YEAR}/schedule/Creighton"
+WOMEN_SHEET_URL     = f"https://www.warrennolan.com/basketballw/{SEASON_END_YEAR}/team-net-sheet?team=Creighton"
 BRACKET_MATRIX      = "http://www.bracketmatrix.com"
 OUTPUT              = os.path.join(os.path.dirname(__file__), "data.json")
 
@@ -44,6 +48,22 @@ HEADERS = {
         "Chrome/122.0.0.0 Safari/537.36"
     )
 }
+
+
+def blank_team() -> dict:
+    """Clean preseason state, used when the saved data belongs to a previous season."""
+    return {
+        "overall": "0-0", "home": "0-0", "road": "0-0", "neutral": "0-0",
+        "conf": "0-0", "last10": "0-0", "streak": "N/A",
+        "net": "N/A", "rpi": "N/A", "elo": "N/A", "sos": "N/A",
+        "nonconf_rpi": "N/A", "nonconf_sos": "N/A",
+        "q1_net": "0-0", "q2_net": "0-0", "q3_net": "0-0", "q4_net": "0-0",
+        "ncaaTourney": "Out",
+        "bm_status": "N/A", "bm_avg_seed": "N/A",
+        "bm_bracket_count": "N/A", "bm_total_brackets": "N/A",
+        "summary": f"Preseason — the {SEASON_LABEL} season hasn't tipped off yet. Check back once games begin.",
+        "recent_results": [],
+    }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -425,7 +445,18 @@ def generate_summary(team_data: dict, gender: str) -> str:
         for r in team_data.get("recent_results", [])
     ) or "  No recent results available."
 
-    prompt = f"""You are writing a brief season summary for the Creighton Bluejays {gender}'s basketball team for the 2025-26 season.
+    is_preseason = team_data.get("overall", "0-0") in ("0-0", "N/A", "")
+    phase_note = (
+        "The season has NOT started yet (0-0 record, no games played). Write a preseason "
+        "outlook that builds anticipation without inventing specific facts about the roster, "
+        "recruits, or rankings. Do not cite stats that say N/A."
+        if is_preseason else
+        "The season is in progress or complete; summarize using the actual data below."
+    )
+
+    prompt = f"""You are writing a brief season summary for the Creighton Bluejays {gender}'s basketball team for the {SEASON_LABEL} season.
+
+{phase_note}
 
 Here is their current data:
 - Overall record: {team_data.get('overall', 'N/A')}
@@ -444,12 +475,19 @@ Write exactly 2 sentences summarizing where this team stands right now and their
     try:
         message = client.messages.create(
             model="claude-sonnet-5-5",
-            max_tokens=150,
+            max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
-        return message.content[0].text.strip()
+        # Newer models may return a thinking block before the answer, so
+        # collect only the text blocks instead of assuming content[0] is text.
+        text_out = "".join(
+            b.text for b in message.content if getattr(b, "type", "") == "text"
+        ).strip()
+        if not text_out:
+            print("  WARNING: Claude returned no text content")
+        return text_out
     except Exception as e:
-        print(f"  WARNING: Claude API error — {e}")
+        print(f"  WARNING: Claude API error ({type(e).__name__}) — {e}")
         return ""
 
 
@@ -549,19 +587,24 @@ def main() -> None:
     print("=" * 60)
 
     # Load previous data.json to use as fallback for failed scrapes
-    previous_men   = {}
-    previous_women = {}
+    previous_men   = blank_team()
+    previous_women = blank_team()
     if os.path.exists(OUTPUT):
         try:
             with open(OUTPUT) as f:
                 prev = json.load(f)
-            previous_men   = prev.get("men",   {})
-            previous_women = prev.get("women", {})
-            print(f"\nLoaded previous data.json as fallback.")
+            if prev.get("season") == SEASON_LABEL:
+                previous_men   = prev.get("men",   {})
+                previous_women = prev.get("women", {})
+                print(f"\nLoaded previous data.json as fallback.")
+            else:
+                print(f"\nSaved data is from a different season "
+                      f"({prev.get('season', 'unlabeled')}) — starting {SEASON_LABEL} fresh.")
         except Exception:
             pass
 
     result = {
+        "season": SEASON_LABEL,
         "updated_utc": datetime.now(timezone.utc).isoformat(),
         "men":   {},
         "women": {},
@@ -576,7 +619,7 @@ def main() -> None:
               f"NET: {result['men'].get('net')}  "
               f"Games: {len(result['men'].get('recent_results', []))}")
     except Exception as e:
-        print(f"      ERROR: {e} — using previous data")
+        print(f"      Not available yet or failed ({e}) — keeping previous/blank data")
         result["men"] = previous_men
 
     # ── Scrape women ───────────────────────────────────────────────────────
@@ -588,7 +631,7 @@ def main() -> None:
               f"NET: {result['women'].get('net')}  "
               f"Games: {len(result['women'].get('recent_results', []))}")
     except Exception as e:
-        print(f"      ERROR: {e} — using previous data")
+        print(f"      Not available yet or failed ({e}) — keeping previous/blank data")
         result["women"] = previous_women
 
     # ── Scrape Bracket Matrix (January–March only) ─────────────────────────
@@ -606,14 +649,16 @@ def main() -> None:
     print("\n[4/5] Generating AI summaries via Claude...")
     if result["men"]:
         print("  Generating men's summary...")
-        result["men"]["summary"] = generate_summary(result["men"], "men")
-        if result["men"]["summary"]:
+        new_summary = generate_summary(result["men"], "men")
+        result["men"]["summary"] = new_summary or previous_men.get("summary", "")
+        if new_summary:
             print(f"  → {result['men']['summary'][:80]}...")
 
     if result["women"]:
         print("  Generating women's summary...")
-        result["women"]["summary"] = generate_summary(result["women"], "women")
-        if result["women"]["summary"]:
+        new_summary = generate_summary(result["women"], "women")
+        result["women"]["summary"] = new_summary or previous_women.get("summary", "")
+        if new_summary:
             print(f"  → {result['women']['summary'][:80]}...")
 
     # ── Write data.json ────────────────────────────────────────────────────
