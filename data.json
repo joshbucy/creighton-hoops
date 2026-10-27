@@ -1,18 +1,18 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-10-25T12:00:00+00:00",
+  "updated_utc": "2026-10-27T01:33:03.404197+00:00",
   "men": {
     "overall": "0-0",
     "home": "0-0",
     "road": "0-0",
     "neutral": "0-0",
     "conf": "0-0",
-    "last10": "0-0",
+    "last10": "3-7",
     "streak": "N/A",
-    "net": "N/A",
-    "rpi": "N/A",
-    "elo": "N/A",
-    "sos": "N/A",
+    "net": "83",
+    "rpi": "1",
+    "elo": "43",
+    "sos": "1",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "0-0",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "Preseason \u2014 the 2026-27 Creighton men's basketball season has not yet tipped off. Check back once games begin for live rankings and results.",
+    "summary": "The Bluejays open the 2026-27 season at 0-0 overall and 0-0 in the Big East, with a NET ranking of 83 and a 3-7 mark over their last 10 games to move past. With no Quadrant 1 results yet, the postseason picture is wide open, and the Big East schedule will give them plenty of chances to build a resume and climb from that starting NET position.",
     "recent_results": []
   },
   "women": {
@@ -46,7 +46,7 @@
     "q3_net": "0-0",
     "q4_net": "0-0",
     "ncaaTourney": "Out",
-    "summary": "Preseason \u2014 the 2026-27 Creighton women's basketball season has not yet tipped off. Check back once games begin for live rankings and results.",
+    "summary": "The 2026-27 slate is still a blank page for the Bluejays, who sit at 0-0 overall and 0-0 in Big East play with every home, road, and neutral-site game still ahead. With no NET ranking or Quadrant 1 results yet, their postseason case will be built from scratch, and each early win and conference matchup will help shape their r\u00e9sum\u00e9.",
     "recent_results": []
   }
 }
