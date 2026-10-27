@@ -443,7 +443,7 @@ Write exactly 2 sentences summarizing where this team stands right now and their
 
     try:
         message = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
             max_tokens=150,
             messages=[{"role": "user", "content": prompt}]
         )
