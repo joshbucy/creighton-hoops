@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-03T20:20:36.227419+00:00",
+  "updated_utc": "2026-11-04T20:36:39.402912+00:00",
   "men": {
     "overall": "1-0",
     "home": "1-0",
@@ -11,7 +11,7 @@
     "streak": "N/A",
     "net": "83",
     "rpi": "1",
-    "elo": "43",
+    "elo": "46",
     "sos": "1",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "At 1-0 with a home win and no conference or Quadrant 1 games played, the Bluejays have almost no r\u00e9sum\u00e9 to judge, and the data is contradictory: a 4-6 last-10 record can't coexist with a one-game season, and an RPI of 1 doesn't square with a NET of 83. Until Big East results arrive, the postseason outlook is undetermined, though a NET of 83 would leave them well outside typical at-large range for now.",
+    "summary": "At 1-0 with a home win and Big East play still ahead, the Bluejays have almost no body of work yet, and the listed 4-6 last-10 mark can't be reconciled with a one-game season. Their NET ranking of 83 is well outside typical at-large range, and the RPI of 1 is almost certainly a small-sample artifact, so with no Quadrant 1 games played, their postseason outlook depends on stacking quality conference wins.",
     "recent_results": []
   },
   "women": {
@@ -37,7 +37,7 @@
     "streak": "N/A",
     "net": "91",
     "rpi": "1",
-    "elo": "61",
+    "elo": "60",
     "sos": "1",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
@@ -46,7 +46,7 @@
     "q3_net": "0-0",
     "q4_net": "0-0",
     "ncaaTourney": "Out",
-    "summary": "With a 1-0 record built on a Quadrant 1 road win, the Bluejays are still waiting to open Big East play (0-0), and their No. 1 RPI is a small-sample artifact next to a NET ranking of 91. The postseason outlook is wide open, since the listed 7-3 mark over the last 10 games conflicts with a 1-0 record and can't be trusted, and a NET of 91 means they'll need a strong conference run to build an at-large case.",
+    "summary": "At 1-0 with a road win that counts as a Quadrant 1 victory, the Bluejays have started well, and their RPI of 1 reflects a one-game sample, while a NET ranking of 91 is well short of at-large range. The listed 7-3 mark over the last 10 games doesn't fit a one-game season and the data shows no recent results or conference games yet, so the postseason outlook is wide open and will hinge on Big East play and a strong league finish or tournament run.",
     "recent_results": []
   }
 }
