@@ -413,12 +413,12 @@ function renderPanel(d, isWomen, container) {
   var statRow = h('div', { class: 'stat-row' });
 
   var glance = [
-    { label:'Overall',  val:fmt(d.overall), sub:'Final record',      cls:'' },
+    { label:'Overall',  val:fmt(d.overall), sub:'Season record',      cls:'' },
     { label:'Big East', val:fmt(d.conf),    sub:'↗ Conference record', cls:'', url:confUrl },
     { label:'Home',     val:fmt(d.home),    sub:'Home record',        cls:'' },
     { label:'Away',     val:fmt(d.road),    sub:'Away record',        cls:'' },
     { label:'Neutral',  val:fmt(d.neutral), sub:'Neutral sites',      cls:'' },
-    { label:'Last 10',  val:fmt(d.last10),  sub:'End of season',      cls:(function(){ var parts=(d.last10||'0-0').split(/[-–]/); var w=parseInt(parts[0])||0; var l=parseInt(parts[1])||0; return w>l?'win':l>w?'lose':'even'; })() }
+    { label:'Last 10',  val:fmt(d.last10),  sub:'Last 10 games',      cls:(function(){ var parts=(d.last10||'0-0').split(/[-–]/); var w=parseInt(parts[0])||0; var l=parseInt(parts[1])||0; return w>l?'win':l>w?'lose':'even'; })() }
   ];
 
   glance.forEach(function(item) {
@@ -494,21 +494,23 @@ function renderPanel(d, isWomen, container) {
               : 'Out';
   var ncaaCls = ncaaVal === 'In' ? 'good' : ncaaVal === 'TBD' ? 'amber' : 'bad';
 
+  var streakCls = /W/i.test(d.streak||'') ? 'good' : /L/i.test(d.streak||'') ? 'bad' : 'dim';
+
   var statusRows = isWomen ? [
     { name:'NCAA Tournament', val:ncaaVal,         cls:ncaaCls },
     { name:'NIT',             val:'TBD',           cls:'amber' },
     { name:'WBIT',            val:'TBD',           cls:'amber' },
     { name:'Postseason',      val:'TBD',           cls:'amber' },
-    { name:'Streak',          val:d.streak||'N/A', cls:(d.streak||'').startsWith('W')?'good':'bad' }
+    { name:'Streak',          val:d.streak||'N/A', cls:streakCls }
   ] : [
     { name:'NCAA Tournament',  val:ncaaVal,          cls:ncaaCls },
     { name:'NIT',              val:'TBD',            cls:'amber' },
     { name:'Postseason',       val:'TBD',            cls:'amber' },
-    { name:'Streak',           val:d.streak||'N/A', cls:(d.streak||'').startsWith('W')?'good':'bad' }
+    { name:'Streak',           val:d.streak||'N/A', cls:streakCls }
   ].concat(bmRows);
 
   [[sheetRows, 'Rankings &amp; Ratings', 'Source: warrennolan.com &middot; KPI, BPI, KenPom &amp; Torvik via their own sites'],
-   [statusRows, isWomen ? 'Season Summary' : 'Postseason Status', isWomen ? 'Source: gocreighton.com &amp; warrennolan.com' : 'Crown QF at MGM Grand Garden Arena &middot; SF/Final at T-Mobile Arena Apr 4&ndash;5']
+   [statusRows, isWomen ? 'Season Summary' : 'Postseason Status', isWomen ? 'Source: gocreighton.com &amp; warrennolan.com' : 'Postseason status is updated by hand once bids are announced']
   ].forEach(function(pair) {
     var rows = pair[0], title = pair[1], note = pair[2];
     var block = h('div', { class:'metric-block' });
