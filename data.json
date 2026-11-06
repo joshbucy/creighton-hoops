@@ -1,31 +1,46 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-05T20:53:14.691277+00:00",
+  "updated_utc": "2026-11-06T04:46:43.715283+00:00",
   "men": {
-    "overall": "1-0",
-    "home": "1-0",
+    "overall": "2-0",
+    "home": "2-0",
     "road": "0-0",
     "neutral": "0-0",
     "conf": "0-0",
-    "last10": "4-6",
-    "streak": "N/A",
+    "last10": "2-0",
+    "streak": "2W",
     "net": "83",
-    "rpi": "19",
-    "elo": "47",
-    "sos": "13",
+    "rpi": "71",
+    "elo": "37",
+    "sos": "74",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "0-0",
     "q2_net": "0-0",
     "q3_net": "0-0",
-    "q4_net": "1-0",
+    "q4_net": "2-0",
     "ncaaTourney": "Out",
     "bm_status": "N/A",
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "At 1-0 with a home win and Big East play still to start, the Bluejays have almost no sample to judge, and the metrics conflict: a NET of 83 sits far from an RPI of 19, and the 4-6 last-10 mark can't come from a single game this season. With no Quadrant 1 games yet and a NET outside the usual at-large range, their postseason outlook is unsettled, and they will need a strong Big East run to build an NCAA tournament case.",
-    "recent_results": []
+    "summary": "Two games into the 2026-27 season, the Bluejays are 2-0 with wins over Kansas City (76-61) and Le Moyne (83-55), both at home, though they have yet to play a road, neutral-site, or Quadrant 1 game. With a NET ranking of 83, an RPI of 71, and Big East play still ahead, their postseason outlook is wide open and will depend on picking up quality wins in conference play to build an at-large case.",
+    "recent_results": [
+      {
+        "date": "Nov 5",
+        "opponent": "vs Le Moyne",
+        "wl": "W",
+        "score": "83-55",
+        "context": ""
+      },
+      {
+        "date": "Nov 2",
+        "opponent": "vs Kansas City",
+        "wl": "W",
+        "score": "76-61",
+        "context": ""
+      }
+    ]
   },
   "women": {
     "overall": "1-0",
@@ -33,12 +48,12 @@
     "road": "1-0",
     "neutral": "0-0",
     "conf": "0-0",
-    "last10": "7-3",
-    "streak": "N/A",
+    "last10": "1-0",
+    "streak": "1W",
     "net": "91",
-    "rpi": "29",
-    "elo": "59",
-    "sos": "20",
+    "rpi": "147",
+    "elo": "62",
+    "sos": "107",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -46,7 +61,15 @@
     "q3_net": "0-0",
     "q4_net": "0-0",
     "ncaaTourney": "Out",
-    "summary": "At 1-0 with a road win that counts as a Quadrant 1 victory, the Bluejays have started cleanly, though Big East play hasn't begun (0-0) and the listed 7-3 last-10 mark can't be reconciled with a one-game record, so I'd treat it as unreliable. With a NET ranking of 91 against an RPI of 29, their postseason outlook is still undefined: the early Q1 win helps, but they will need a strong conference run to move the NET into at-large range.",
-    "recent_results": []
+    "summary": "Just one game into the 2026-27 season, the Bluejays sit at 1-0 after a 73-71 road win at South Dakota State that already counts as a Quadrant 1 victory, though their NET ranking of 91 and RPI of 147 reflect how little data exists so far. With Big East play still ahead at 0-0, it's too early to project a postseason path, but that opening road win gives them an early r\u00e9sum\u00e9 boost as they chase an at-large bid.",
+    "recent_results": [
+      {
+        "date": "Nov 2",
+        "opponent": "at South Dakota State",
+        "wl": "W",
+        "score": "73-71",
+        "context": ""
+      }
+    ]
   }
 }
