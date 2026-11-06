@@ -22,7 +22,8 @@ import json
 import os
 import re
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 
 import anthropic
 import requests
@@ -38,6 +39,16 @@ MEN_SCHEDULE_URL    = f"https://www.warrennolan.com/basketball/{SEASON_END_YEAR}
 MEN_SHEET_URL       = f"https://www.warrennolan.com/basketball/{SEASON_END_YEAR}/team-net-sheet?team=Creighton"
 WOMEN_SCHEDULE_URL  = f"https://www.warrennolan.com/basketballw/{SEASON_END_YEAR}/schedule/Creighton"
 WOMEN_SHEET_URL     = f"https://www.warrennolan.com/basketballw/{SEASON_END_YEAR}/team-net-sheet?team=Creighton"
+# ESPN's public schedule feed (structured JSON) — used for the Last 5 Games table
+ESPN_TEAM_ID        = "156"
+ESPN_MEN_URL        = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/156/schedule"
+ESPN_WOMEN_URL      = "https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/156/schedule"
+SEASON_START        = datetime(SEASON_END_YEAR - 1, 10, 1, tzinfo=timezone.utc)
+try:
+    CENTRAL = ZoneInfo("America/Chicago")
+except Exception:
+    CENTRAL = timezone(timedelta(hours=-6))
+
 BRACKET_MATRIX      = "http://www.bracketmatrix.com"
 OUTPUT              = os.path.join(os.path.dirname(__file__), "data.json")
 
@@ -339,7 +350,8 @@ def scrape_recent_results(soup: BeautifulSoup) -> list:
             })
 
     # Return 5 most recent (last in list = most recent)
-    return results[-5:] if len(results) >= 5 else results
+    print(f"  Warren Nolan result rows parsed: {len(results)}")
+    return list(reversed(results[-5:]))   # newest first
 
 
 def validate_and_merge(scraped: dict, previous: dict) -> dict:
@@ -368,9 +380,11 @@ def validate_and_merge(scraped: dict, previous: dict) -> dict:
     if scraped.get("streak") and scraped["streak"] != "N/A":
         result["streak"] = scraped["streak"]
 
-    # Recent results — only update if we got at least 3 games
-    if len(scraped.get("recent_results", [])) >= 3:
-        result["recent_results"] = scraped["recent_results"]
+    # Recent results — keep every game that passes validation (even just one,
+    # early in the season); bad rows are dropped individually.
+    good = [r for r in scraped.get("recent_results", []) if valid_result(r)]
+    if good:
+        result["recent_results"] = good
 
     # Summary — always update if present
     if scraped.get("summary"):
@@ -427,7 +441,166 @@ def scrape_team(schedule_url: str, sheet_url: str) -> dict:
     except Exception as e:
         print(f"  WARNING: Team sheet fetch failed — {e}")
 
+    missing = [k for k in ("overall", "home", "road", "neutral", "conf", "last10",
+                           "net", "rpi", "elo", "sos", "q1_net", "streak")
+               if data.get(k) in (None, "", "N/A")]
+    print(f"  Warren Nolan fields not found: {missing or 'none'}")
     return data
+
+
+# ── Result validation, ESPN schedule, sanity checks ──────────────────────────
+
+def valid_result(r: dict) -> bool:
+    """A game row is usable only if every field looks like a real game."""
+    return (
+        isinstance(r, dict)
+        and r.get("wl") in ("W", "L")
+        and bool(re.match(r"^\d+-\d+$", str(r.get("score", ""))))
+        and r.get("date") not in (None, "", "N/A")
+        and r.get("opponent") not in (None, "", "N/A")
+    )
+
+
+def total_games(rec) -> int | None:
+    m = re.match(r"^(\d+)-(\d+)$", str(rec or "").strip())
+    return int(m.group(1)) + int(m.group(2)) if m else None
+
+
+def _parse_espn_date(s):
+    for fmt in ("%Y-%m-%dT%H:%MZ", "%Y-%m-%dT%H:%M:%SZ"):
+        try:
+            return datetime.strptime(s, fmt).replace(tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def _espn_score(c: dict):
+    sc = c.get("score")
+    if isinstance(sc, dict):
+        sc = sc.get("displayValue", sc.get("value"))
+    try:
+        return int(float(sc))
+    except (TypeError, ValueError):
+        return None
+
+
+def fetch_espn_games(url: str) -> list:
+    """Completed, non-exhibition games this season, oldest first."""
+    print(f"  Fetching {url}...")
+    resp = requests.get(url, headers=HEADERS, timeout=20)
+    resp.raise_for_status()
+    games = []
+    for ev in resp.json().get("events", []):
+        try:
+            comp = (ev.get("competitions") or [{}])[0]
+            status = ((comp.get("status") or ev.get("status") or {}).get("type")) or {}
+            if not status.get("completed"):
+                continue
+            if str((ev.get("seasonType") or {}).get("type")) == "1":   # preseason/exhibition
+                continue
+            when = _parse_espn_date(ev.get("date"))
+            if not when or when < SEASON_START:
+                continue
+            us = opp = None
+            for c in comp.get("competitors", []):
+                cid = str((c.get("team") or {}).get("id", c.get("id")))
+                if cid == ESPN_TEAM_ID:
+                    us = c
+                else:
+                    opp = c
+            if not us or not opp:
+                continue
+            pf, pa = _espn_score(us), _espn_score(opp)
+            if pf is None or pa is None or pf == pa:
+                continue
+            team = opp.get("team") or {}
+            name = team.get("location") or team.get("shortDisplayName") or team.get("displayName") or "Opponent"
+            rank = (opp.get("curatedRank") or {}).get("current")
+            if isinstance(rank, int) and 1 <= rank <= 25:
+                name = f"#{rank} {name}"
+            where = "neutral" if comp.get("neutralSite") else ("away" if us.get("homeAway") == "away" else "home")
+            notes = comp.get("notes") or []
+            context = (notes[0].get("headline", "") if notes and isinstance(notes[0], dict) else "")
+            games.append({
+                "when": when.astimezone(CENTRAL), "win": pf > pa, "pf": pf, "pa": pa,
+                "opp": name, "where": where,
+                "conf": bool(comp.get("conferenceCompetition")), "context": context[:40],
+            })
+        except Exception as e:                      # one odd event shouldn't sink the rest
+            print(f"  ESPN: skipped an event ({type(e).__name__}: {e})")
+    games.sort(key=lambda g: g["when"])
+    return games
+
+
+def games_to_recent(games: list) -> list:
+    out = []
+    for g in reversed(games[-5:]):                  # newest first
+        out.append({
+            "date": f"{g['when'].strftime('%b')} {g['when'].day}",
+            "opponent": ("at " if g["where"] == "away" else "vs ") + g["opp"],
+            "wl": "W" if g["win"] else "L",
+            "score": f"{max(g['pf'], g['pa'])}-{min(g['pf'], g['pa'])}",
+            "context": g["context"] or ("Conference" if g["conf"] else ""),
+        })
+    return out
+
+
+def games_to_records(games: list) -> dict:
+    def rec(sub):
+        w = sum(1 for g in sub if g["win"])
+        return f"{w}-{len(sub) - w}"
+    last = games[-1]["win"]
+    n = 0
+    for g in reversed(games):
+        if g["win"] != last:
+            break
+        n += 1
+    return {
+        "overall": rec(games),
+        "home":    rec([g for g in games if g["where"] == "home"]),
+        "road":    rec([g for g in games if g["where"] == "away"]),
+        "neutral": rec([g for g in games if g["where"] == "neutral"]),
+        "conf":    rec([g for g in games if g["conf"]]),
+        "last10":  rec(games[-10:]),
+        "streak":  f"{n}{'W' if last else 'L'}",
+    }
+
+
+def espn_overlay(team: dict, url: str, fill_records: bool) -> dict:
+    """Last 5 results from ESPN; also W-L splits if Warren Nolan was unavailable."""
+    try:
+        games = fetch_espn_games(url)
+    except Exception as e:
+        print(f"  ESPN unavailable ({type(e).__name__}: {e}) — leaving results as they are")
+        return team
+    if not games:
+        print("  ESPN: no completed games found for this season yet")
+        return team
+    team = dict(team)
+    team["recent_results"] = games_to_recent(games)
+    print(f"  ESPN: {len(games)} completed game(s); showing the latest {len(team['recent_results'])}")
+    if fill_records:
+        team.update(games_to_records(games))
+        print(f"  ESPN: filled records (Warren Nolan unavailable) -> overall {team['overall']}")
+    return team
+
+
+def finalize_team(t: dict) -> dict:
+    """Final sanity pass so impossible combinations never reach the site."""
+    t = dict(t)
+    played = total_games(t.get("overall"))
+    if played is not None and played <= 10:
+        t["last10"] = t.get("overall")              # under 10 games: last 10 == season record
+    rr = t.get("recent_results") or []
+    if t.get("streak") in (None, "", "N/A") and rr:
+        first, n = rr[0]["wl"], 0
+        for r in rr:
+            if r["wl"] != first:
+                break
+            n += 1
+        t["streak"] = f"{n}{first}" + ("+" if n == len(rr) >= 5 else "")
+    return t
 
 
 # ── AI Summary ────────────────────────────────────────────────────────────────
@@ -612,6 +785,7 @@ def main() -> None:
 
     # ── Scrape men ─────────────────────────────────────────────────────────
     print("\n[1/5] Scraping men's data...")
+    men_wn_failed = False
     try:
         raw_men = scrape_team(MEN_SCHEDULE_URL, MEN_SHEET_URL)
         result["men"] = validate_and_merge(raw_men, previous_men)
@@ -621,9 +795,11 @@ def main() -> None:
     except Exception as e:
         print(f"      Not available yet or failed ({e}) — keeping previous/blank data")
         result["men"] = previous_men
+        men_wn_failed = True
 
     # ── Scrape women ───────────────────────────────────────────────────────
     print("\n[2/5] Scraping women's data...")
+    women_wn_failed = False
     try:
         raw_women = scrape_team(WOMEN_SCHEDULE_URL, WOMEN_SHEET_URL)
         result["women"] = validate_and_merge(raw_women, previous_women)
@@ -633,6 +809,12 @@ def main() -> None:
     except Exception as e:
         print(f"      Not available yet or failed ({e}) — keeping previous/blank data")
         result["women"] = previous_women
+        women_wn_failed = True
+
+    # ── ESPN schedule feed: Last 5 results, plus records if Warren Nolan failed ──
+    print("\n[2.5/5] Recent results from ESPN...")
+    result["men"]   = finalize_team(espn_overlay(result["men"],   ESPN_MEN_URL,   men_wn_failed))
+    result["women"] = finalize_team(espn_overlay(result["women"], ESPN_WOMEN_URL, women_wn_failed))
 
     # ── Scrape Bracket Matrix (January–March only) ─────────────────────────
     current_month = datetime.now(timezone.utc).month
