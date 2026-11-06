@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-06T04:46:43.715283+00:00",
+  "updated_utc": "2026-11-06T20:09:42.342591+00:00",
   "men": {
     "overall": "2-0",
     "home": "2-0",
@@ -10,9 +10,9 @@
     "last10": "2-0",
     "streak": "2W",
     "net": "83",
-    "rpi": "71",
+    "rpi": "72",
     "elo": "37",
-    "sos": "74",
+    "sos": "75",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "0-0",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "Two games into the 2026-27 season, the Bluejays are 2-0 with wins over Kansas City (76-61) and Le Moyne (83-55), both at home, though they have yet to play a road, neutral-site, or Quadrant 1 game. With a NET ranking of 83, an RPI of 71, and Big East play still ahead, their postseason outlook is wide open and will depend on picking up quality wins in conference play to build an at-large case.",
+    "summary": "Two games into the 2026-27 season, the Bluejays are 2-0 at home with double-digit wins over Kansas City (76-61) and Le Moyne (83-55), though both opponents were non-marquee, and Big East play and Quadrant 1 opportunities have yet to begin. With a NET of 83 and an RPI of 72, they have little postseason r\u00e9sum\u00e9 to judge so far, so their NCAA Tournament outlook will hinge on how well they do against the tougher non-conference slate and the Big East schedule.",
     "recent_results": [
       {
         "date": "Nov 5",
@@ -51,9 +51,9 @@
     "last10": "1-0",
     "streak": "1W",
     "net": "91",
-    "rpi": "147",
+    "rpi": "163",
     "elo": "62",
-    "sos": "107",
+    "sos": "118",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -61,7 +61,7 @@
     "q3_net": "0-0",
     "q4_net": "0-0",
     "ncaaTourney": "Out",
-    "summary": "Just one game into the 2026-27 season, the Bluejays sit at 1-0 after a 73-71 road win at South Dakota State that already counts as a Quadrant 1 victory, though their NET ranking of 91 and RPI of 147 reflect how little data exists so far. With Big East play still ahead at 0-0, it's too early to project a postseason path, but that opening road win gives them an early r\u00e9sum\u00e9 boost as they chase an at-large bid.",
+    "summary": "Just one game into 2026-27, the Bluejays are 1-0 after a 73-71 road win at South Dakota State on Nov. 2, which counts as a Quadrant 1 victory and gives them an early r\u00e9sum\u00e9 boost. With a NET ranking of 91 (RPI 163) and Big East play yet to begin, they'll need to build on that win in conference to climb into at-large contention, though it's far too early to project a firm postseason outlook.",
     "recent_results": [
       {
         "date": "Nov 2",
