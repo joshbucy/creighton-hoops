@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-13T20:42:03.515959+00:00",
+  "updated_utc": "2026-11-14T18:54:11.704196+00:00",
   "men": {
     "overall": "2-1",
     "home": "2-0",
@@ -10,9 +10,9 @@
     "last10": "2-1",
     "streak": "2W",
     "net": "83",
-    "rpi": "182",
-    "elo": "60",
-    "sos": "243",
+    "rpi": "187",
+    "elo": "61",
+    "sos": "253",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "0-0",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "At 2-1 after an 89-82 loss at Kansas State on Nov 10, the Bluejays are coming off a road setback following home wins over Kansas City (76-61) and Le Moyne (83-55), and they have yet to play a Quadrant 1 game or a Big East contest. With a NET ranking of 83 and an RPI of 182, their at-large case is still undeveloped, so they will need to build a strong r\u00e9sum\u00e9 in Big East play to move into NCAA Tournament contention.",
+    "summary": "A 2-1 start, built on home wins of 76-61 over Kansas City and 83-55 over Le Moyne, was interrupted by an 89-82 road loss at Kansas State in the most recent game. With a NET of 83, an RPI of 187, no Quadrant 1 games yet and Big East play still ahead (0-0), the Bluejays are outside the at-large picture for now and will need a strong conference run with several Q1 wins to build an NCAA Tournament case.",
     "recent_results": [
       {
         "date": "Nov 10",
@@ -58,9 +58,9 @@
     "last10": "2-1",
     "streak": "1W",
     "net": "91",
-    "rpi": "79",
-    "elo": "71",
-    "sos": "150",
+    "rpi": "83",
+    "elo": "68",
+    "sos": "151",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -68,7 +68,7 @@
     "q3_net": "0-0",
     "q4_net": "0-1",
     "ncaaTourney": "Out",
-    "summary": "At 2-1 with both wins on the road, including a 73-71 Quad 1 win at South Dakota State and a 66-60 win at North Dakota State, the Bluejays sit at NET 91 and RPI 79 but dropped their latest game 54-49 to South Dakota on a neutral court. With Big East play still ahead (0-0), they're on the at-large bubble's outer edge, and they'll need a strong conference record and more quality wins to climb into NCAA contention, with a WBIT bid the more realistic fallback.",
+    "summary": "Sitting at 2-1 with road wins at South Dakota State (73-71) and North Dakota State (66-60) plus a 54-49 neutral-site loss to South Dakota on Nov. 11, the Bluejays own a 1-0 Quadrant 1 record but sit at only 91st in the NET and 83rd in the RPI. With Big East play still to start (0-0), their at-large NCAA case is thin for now, so they'll need a strong conference showing or a deep run in the Big East Tournament, with the WBIT as the more realistic fallback.",
     "recent_results": [
       {
         "date": "Nov 11",
