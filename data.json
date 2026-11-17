@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-16T23:07:20.898835+00:00",
+  "updated_utc": "2026-11-17T21:57:43.720487+00:00",
   "men": {
     "overall": "3-1",
     "home": "2-0",
@@ -10,9 +10,9 @@
     "last10": "3-1",
     "streak": "2W",
     "net": "83",
-    "rpi": "51",
-    "elo": "49",
-    "sos": "143",
+    "rpi": "34",
+    "elo": "50",
+    "sos": "112",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "At 3-1 with a two-game winning streak, the Bluejays have a Quadrant 1 win (a 70-69 squeaker over Iowa) and double-digit home wins over Kansas City and Le Moyne, though their only road game ended in an 89-82 loss at Kansas State. With a NET of 83 (RPI 51) and Big East play still ahead at 0-0, their postseason outlook is open, and they will likely need a strong conference record and more quality wins to move into at-large range.",
+    "summary": "The Bluejays sit at 3-1 with a two-game win streak, highlighted by a 70-69 squeaker over Iowa for their 1-0 Quadrant 1 mark, though their lone loss was an 89-82 setback at Kansas State. With a NET of 83 (despite a stronger RPI of 34) and Big East play still ahead at 0-0, their NCAA tournament outlook is open but unproven, as they'll need a strong conference showing to climb into at-large range.",
     "recent_results": [
       {
         "date": "Nov 15",
@@ -65,9 +65,9 @@
     "last10": "3-1",
     "streak": "1W",
     "net": "91",
-    "rpi": "197",
-    "elo": "56",
-    "sos": "295",
+    "rpi": "196",
+    "elo": "57",
+    "sos": "297",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -75,7 +75,7 @@
     "q3_net": "1-0",
     "q4_net": "0-1",
     "ncaaTourney": "Out",
-    "summary": "The Bluejays sit at 3-1 with a 3-0 road record, a 1-0 mark in Quadrant 1 games (the 73-71 win at South Dakota State), and a one-game winning streak after a 72-50 rout of Northern Iowa, though their lone loss was a 54-49 neutral-site defeat to South Dakota. With a NET ranking of 91, an RPI of 197, and Big East play still ahead (0-0), their postseason outlook is open: an at-large NCAA bid would require a strong conference run, while the current r\u00e9sum\u00e9 points more toward WBIT consideration.",
+    "summary": "At 3-1 with a perfect 3-0 road record, the Bluejays have opened strongly, highlighted by a 73-71 win at South Dakota State (their 1-0 Quadrant 1 mark) and a 72-50 win at Northern Iowa, with the only loss a 54-49 neutral-site defeat to South Dakota. A NET ranking of 91 and an RPI of 196 leave them outside at-large range for now, so with Big East play still ahead (0-0), they will need a strong conference record and more quality wins to make the NCAA Tournament, with the WBIT a more realistic target if they stay at this level.",
     "recent_results": [
       {
         "date": "Nov 15",
