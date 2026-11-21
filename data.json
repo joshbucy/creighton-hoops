@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-20T21:37:58.498885+00:00",
+  "updated_utc": "2026-11-21T20:18:26.918149+00:00",
   "men": {
     "overall": "4-1",
     "home": "3-0",
@@ -10,9 +10,9 @@
     "last10": "4-1",
     "streak": "2W",
     "net": "83",
-    "rpi": "79",
-    "elo": "46",
-    "sos": "234",
+    "rpi": "116",
+    "elo": "45",
+    "sos": "285",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "The Bluejays are 4-1 early, riding a two-game winning streak that includes a one-point neutral-site win over Iowa (their Quadrant 1 victory) and a 23-point rout of Bethune-Cookman, with the lone loss coming 89-82 at Kansas State. With a NET of 83 and an RPI of 79, they have work to do before Big East play begins to build an at-large r\u00e9sum\u00e9, though that Q1 win and a 0-0 conference slate leave plenty of time to climb.",
+    "summary": "The Bluejays are 4-1 and riding a two-game winning streak, highlighted by a 70-69 neutral-site win over Iowa for their lone Quadrant 1 result (1-0) and an 88-65 rout of Bethune-Cookman, with the only loss an 89-82 road defeat at Kansas State. With a NET ranking of 83, an RPI of 116, and Big East play still ahead (0-0), they aren't yet in at-large position and will need a strong conference record to climb into NCAA Tournament consideration.",
     "recent_results": [
       {
         "date": "Nov 18",
@@ -72,9 +72,9 @@
     "last10": "4-1",
     "streak": "1W",
     "net": "91",
-    "rpi": "101",
-    "elo": "56",
-    "sos": "233",
+    "rpi": "107",
+    "elo": "58",
+    "sos": "244",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -82,7 +82,7 @@
     "q3_net": "1-0",
     "q4_net": "1-1",
     "ncaaTourney": "Out",
-    "summary": "The Bluejays are 4-1 with a perfect 3-0 road mark, a 73-71 Quadrant 1 win at South Dakota State, and two double-digit wins in their last two games, though their only loss was a 54-49 neutral-site defeat to South Dakota. With a NET ranking of 91, an RPI of 101, and no Big East games played yet, they're outside at-large NCAA Tournament range for now, so they'll need a strong conference showing to move up, and the WNIT is the more realistic postseason outlook at this point.",
+    "summary": "The Bluejays sit at 4-1 with a perfect 3-0 road record, a 1-0 mark in Quadrant 1 games, and back-to-back blowouts of Northern Iowa (72-50) and Omaha (74-53) after a 54-49 neutral-site loss to South Dakota. With a NET of 91, an RPI of 107, and Big East play still to begin, their postseason outlook is open but not yet strong, so they will need a solid conference record and more quality wins to build an at-large case.",
     "recent_results": [
       {
         "date": "Nov 18",
