@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-22T20:31:05.439125+00:00",
+  "updated_utc": "2026-11-24T01:24:44.716652+00:00",
   "men": {
     "overall": "4-1",
     "home": "3-0",
@@ -10,9 +10,9 @@
     "last10": "4-1",
     "streak": "2W",
     "net": "83",
-    "rpi": "116",
+    "rpi": "109",
     "elo": "46",
-    "sos": "290",
+    "sos": "298",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -24,7 +24,7 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "Two straight wins, including a 70-69 squeaker over Iowa that gives the Bluejays their lone Quadrant 1 victory, have them at 4-1 with a perfect 3-0 home mark, though the only loss was an 89-82 road defeat at Kansas State on Nov. 10. With a NET of 83 and an RPI of 116 and Big East play still ahead, the postseason picture is wide open, as Creighton will need to turn that early r\u00e9sum\u00e9 into a strong conference showing to climb into at-large contention.",
+    "summary": "Through five games, the Bluejays sit at 4-1 with a two-game winning streak, highlighted by a 70-69 neutral-site win over Iowa (their 1-0 Quadrant 1 mark) and a lone road loss, 89-82 at Kansas State. With a NET of 83 and RPI of 109, they have work to do to build an at--large profile, so Big East play, which hasn't started yet, will be the real test of whether they can climb into NCAA Tournament contention.",
     "recent_results": [
       {
         "date": "Nov 18",
@@ -64,26 +64,33 @@
     ]
   },
   "women": {
-    "overall": "4-1",
-    "home": "1-0",
+    "overall": "4-2",
+    "home": "1-1",
     "road": "3-0",
     "neutral": "0-1",
     "conf": "0-0",
-    "last10": "4-1",
+    "last10": "4-2",
     "streak": "1W",
     "net": "91",
-    "rpi": "89",
-    "elo": "54",
-    "sos": "222",
+    "rpi": "86",
+    "elo": "65",
+    "sos": "128",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
-    "q2_net": "1-0",
+    "q2_net": "1-1",
     "q3_net": "1-0",
     "q4_net": "1-1",
     "ncaaTourney": "Out",
-    "summary": "The Bluejays sit at 4-1 with a perfect 3-0 road mark, a 73-71 win at South Dakota State that stands as their lone Quadrant 1 victory, and back-to-back blowouts of Northern Iowa (72-50) and Omaha (74-53), though their only loss was a 54-49 neutral-site defeat to South Dakota. With a NET of 91 and an RPI of 89 and Big East play still to begin, they are outside at-large range for now, so they will likely need a strong conference record to move into WBIT consideration or to make a Big East Tournament run for the automatic bid.",
+    "summary": "At 4-2 with a perfect 3-0 road record and a 1-0 mark in Quadrant 1, the Bluejays sit at NET 91 and RPI 86 after Saturday's 55-45 neutral-site loss to #23 Nebraska, which followed a home loss to South Dakota (54-49) on Nov. 11. With Big East play still at 0-0, an NCAA at-large bid is a long shot at this ranking, so they will need a strong conference run and more quality wins to move from WNIT-level territory into the at-large conversation.\n\nNote: the listed \"1W\" streak conflicts with the game log, which shows the Nov. 22 loss as the most recent result, so I went with the game log.",
     "recent_results": [
+      {
+        "date": "Nov 22",
+        "opponent": "vs #23 Nebraska",
+        "wl": "L",
+        "score": "55-45",
+        "context": ""
+      },
       {
         "date": "Nov 18",
         "opponent": "vs Omaha",
@@ -110,13 +117,6 @@
         "opponent": "at North Dakota State",
         "wl": "W",
         "score": "66-60",
-        "context": ""
-      },
-      {
-        "date": "Nov 2",
-        "opponent": "at South Dakota State",
-        "wl": "W",
-        "score": "73-71",
         "context": ""
       }
     ]
