@@ -1,21 +1,21 @@
 {
   "season": "2026-27",
-  "updated_utc": "2026-11-26T22:41:40.503009+00:00",
+  "updated_utc": "2026-11-27T22:25:29.748430+00:00",
   "men": {
-    "overall": "5-1",
+    "overall": "6-1",
     "home": "3-0",
     "road": "0-1",
-    "neutral": "2-0",
+    "neutral": "3-0",
     "conf": "0-0",
-    "last10": "5-1",
+    "last10": "6-1",
     "streak": "2W",
     "net": "83",
-    "rpi": "85",
-    "elo": "35",
-    "sos": "299",
+    "rpi": "65",
+    "elo": "28",
+    "sos": "259",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
-    "q1_net": "2-0",
+    "q1_net": "3-0",
     "q2_net": "0-1",
     "q3_net": "0-0",
     "q4_net": "3-0",
@@ -24,8 +24,15 @@
     "bm_avg_seed": "N/A",
     "bm_bracket_count": "N/A",
     "bm_total_brackets": "N/A",
-    "summary": "At 5-1 with a two-game win streak, the Bluejays have a 2-0 mark in Quadrant 1 games and recent blowouts of Michigan (99-73) and Bethune-Cookman (88-65), with their only loss a 89-82 defeat at Kansas State. Their NET ranking of 83 and RPI of 85 sit well outside at-large range, so with Big East play still ahead, their NCAA Tournament case depends on turning this strong start into a high conference finish and more quality wins.",
+    "summary": "At 6-1 with a two-game winning streak, the Bluejays have rolled through November, with the lone loss an 89-82 road defeat at Kansas State and a perfect 3-0 mark in Quadrant 1 games, including a 99-73 rout of Michigan and a 95-87 win over TCU. Their NET ranking of 83 (RPI 65) is still modest and Big East play hasn't started, so the NCAA Tournament outlook is promising but unsettled, and they'll need to turn that early Quad 1 r\u00e9sum\u00e9 into conference wins, especially on the road, where they're 0-1.",
     "recent_results": [
+      {
+        "date": "Nov 26",
+        "opponent": "vs TCU",
+        "wl": "W",
+        "score": "95-87",
+        "context": "Players Era 16"
+      },
       {
         "date": "Nov 24",
         "opponent": "vs Michigan",
@@ -53,13 +60,6 @@
         "wl": "L",
         "score": "89-82",
         "context": ""
-      },
-      {
-        "date": "Nov 5",
-        "opponent": "vs Le Moyne",
-        "wl": "W",
-        "score": "83-55",
-        "context": ""
       }
     ]
   },
@@ -72,9 +72,9 @@
     "last10": "4-2",
     "streak": "1W",
     "net": "91",
-    "rpi": "94",
+    "rpi": "101",
     "elo": "68",
-    "sos": "142",
+    "sos": "172",
     "nonconf_rpi": "N/A",
     "nonconf_sos": "N/A",
     "q1_net": "1-0",
@@ -82,7 +82,7 @@
     "q3_net": "1-0",
     "q4_net": "1-1",
     "ncaaTourney": "Out",
-    "summary": "At 4-2 with a perfect 3-0 road mark and a Quadrant 1 win already banked, the Bluejays have a decent early profile, though a NET of 91 (RPI 94) and back-to-back-type setbacks against South Dakota (54-49) and #23 Nebraska (55-45) leave little margin. With Big East play still at 0-0, an NCAA at-large bid looks like a long shot right now, so a WNIT-caliber finish is the more realistic outlook unless they put together a strong conference record and add more quality wins.",
+    "summary": "With a 4-2 record, a 3-0 mark away from home, and a 1-0 Quadrant 1 record, the Bluejays sit at NET 91 (RPI 101) after a 55-45 loss to #23 Nebraska on Nov 22 that followed home-court wins and losses to South Dakota (54-49) and Omaha-bracketed results (74-53 win), though the listed \"1W\" streak doesn't match that most recent loss. With Big East play still to start, an NCAA at-large bid looks like a long shot at this ranking, so their realistic path is to stack conference wins to climb the NET and, failing that, to land a WNIT bid.",
     "recent_results": [
       {
         "date": "Nov 22",
